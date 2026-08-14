@@ -6,21 +6,16 @@
 <title>TabTo 서비스 매뉴얼</title>
 <style>
 :root{
-  --bg:#faf9f5;
-  --surface:#ffffff;
-  --line:#e8e3d9;
-  --line-soft:#efeadf;
-  --ink:#1f1d18;
-  --ink-soft:#57534a;
-  --ink-mute:#8a857a;
-  --accent:#c2410c;
-  --accent-soft:#fdf1e7;
-  --note-bg:#f2f6fc;
-  --note-line:#3b6fb5;
-  --warn-bg:#fdf3e7;
-  --warn-line:#d97706;
-  --key-bg:#eef7ef;
-  --key-line:#2f8a43;
+  --bg:#ffffff;
+  --ink:#18181b;
+  --ink2:#52525b;
+  --mute:#9ca3af;
+  --line:#e5e7eb;
+  --line-soft:#f0f0f2;
+  --surface:#f4f4f5;
+  --th-bg:#f8f8f9;
+  --dark:#161616;
+  --accent:#f04e23;
   --radius:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -33,131 +28,142 @@ body{
   font-size:16px;
   -webkit-font-smoothing:antialiased;
 }
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:#d4d4d8;text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
 
 /* ---------- layout ---------- */
 .layout{display:flex;min-height:100vh}
 .sidebar{
-  width:272px;flex:none;
+  width:268px;flex:none;
   border-right:1px solid var(--line);
-  padding:28px 20px 48px;
+  padding:30px 18px 48px;
   position:sticky;top:0;height:100vh;overflow-y:auto;
   background:var(--bg);
 }
-.content{flex:1;min-width:0;padding:48px 56px 96px}
-.page{max-width:780px;margin:0 auto}
+.content{flex:1;min-width:0;padding:56px 64px 96px}
+.page{max-width:760px;margin:0 auto}
 
 /* ---------- sidebar ---------- */
-.brand{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.brand{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;padding:0 10px}
 .brand .logo{font-size:19px;font-weight:800;letter-spacing:-.02em}
-.brand .ver{font-size:11.5px;color:var(--ink-mute);font-weight:600}
-.brand-sub{font-size:12.5px;color:var(--ink-mute);margin-bottom:22px}
-.nav-group{margin-bottom:20px}
+.brand .ver{font-size:11.5px;color:var(--mute);font-weight:600}
+.brand-sub{font-size:12.5px;color:var(--mute);margin-bottom:26px;padding:0 10px}
+.nav-group{margin-bottom:22px}
 .nav-group>.gname{
-  font-size:11.5px;font-weight:700;color:var(--ink-mute);
-  letter-spacing:.06em;text-transform:uppercase;
-  padding:0 10px;margin-bottom:6px;
+  font-size:11.5px;font-weight:700;color:var(--mute);
+  letter-spacing:.05em;
+  padding:0 10px;margin-bottom:5px;
 }
 .nav-group a{
-  display:block;padding:5px 10px;border-radius:8px;
-  font-size:13.5px;color:var(--ink-soft);
+  display:block;padding:5px 10px;border-radius:7px;
+  font-size:13.5px;color:var(--ink2);text-decoration:none;
 }
-.nav-group a:hover{background:#f1ede4;text-decoration:none;color:var(--ink)}
-.nav-group a.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.nav-group a .no{display:inline-block;min-width:34px;color:var(--ink-mute);font-size:12px;font-variant-numeric:tabular-nums}
-.nav-group a.active .no{color:var(--accent)}
+.nav-group a:hover{background:var(--surface);color:var(--ink)}
+.nav-group a.active{background:var(--surface);color:var(--ink);font-weight:700}
+.nav-group a .no{display:inline-block;min-width:36px;color:var(--mute);font-size:12px;font-variant-numeric:tabular-nums;font-weight:400}
+.nav-group a.active .no{color:var(--accent);font-weight:700}
 
 /* mobile toggle */
 #nav-toggle{display:none}
 .nav-btn{display:none}
 
 /* ---------- hero ---------- */
-.hero{padding-bottom:36px;border-bottom:1px solid var(--line);margin-bottom:48px}
-.hero .badges{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.hero{padding-bottom:44px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.hero .badges{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
 .badge{
-  font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;
-  background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);
+  font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;
+  background:var(--surface);color:var(--ink2);
 }
-.badge.accent{background:var(--accent-soft);border-color:#f3d5bd;color:var(--accent)}
-.hero h1{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:10px}
-.hero p{color:var(--ink-soft);max-width:620px}
+.hero h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:12px}
+.hero p{color:var(--ink2);max-width:600px}
 
 /* ---------- chapter / article ---------- */
-.chapter{margin:64px 0 8px;display:flex;align-items:center;gap:14px}
-.chapter .num{
-  font-size:13px;font-weight:800;color:var(--accent);
-  background:var(--accent-soft);border-radius:8px;padding:3px 10px;letter-spacing:.04em;
-}
-.chapter h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
+.chapter{margin:72px 0 0;display:flex;align-items:center;gap:12px}
+.chapter .num{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.06em}
+.chapter h2{font-size:15px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
 .chapter-line{height:1px;background:var(--line);flex:1}
 
-article{padding:40px 0;border-bottom:1px solid var(--line-soft);scroll-margin-top:24px}
+article{padding:52px 0;border-bottom:1px solid var(--line-soft);scroll-margin-top:24px}
 article:last-of-type{border-bottom:none}
-.kicker{font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:6px}
-article h3{font-size:24px;font-weight:800;letter-spacing:-.015em;margin-bottom:14px}
-article h4{font-size:16.5px;font-weight:700;margin:28px 0 10px}
-article p{margin:10px 0;color:#33302a}
+.crumb{font-size:13px;color:var(--mute);margin-bottom:14px}
+.crumb .sep{margin:0 6px;color:#d4d4d8}
+.crumb b{color:var(--ink);font-weight:700}
+article h3{font-size:31px;font-weight:800;letter-spacing:-.025em;line-height:1.25;margin-bottom:8px}
+.sub{font-size:15px;color:var(--mute);margin-bottom:22px}
+article h4{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:44px 0 14px}
+article p{margin:10px 0;color:#3f3f46}
 article p b,article li b{color:var(--ink)}
 
 /* ---------- tables ---------- */
-.tbl-wrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.55}
-th,td{padding:9px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft)}
-th{background:#f6f2ea;font-weight:700;font-size:13px;color:var(--ink-soft);white-space:nowrap}
+.tbl-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.6}
+th,td{padding:13px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft)}
+th{background:var(--th-bg);font-weight:700;font-size:13.5px;color:var(--ink);white-space:nowrap;border-bottom:1px solid var(--line)}
 tr:last-child td{border-bottom:none}
-td:first-child{font-weight:600;white-space:nowrap}
-td.wrap{white-space:normal;font-weight:400}
-kbd{
-  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;
-  background:#f1ede4;border:1px solid var(--line);border-bottom-width:2px;
-  border-radius:5px;padding:1px 6px;white-space:nowrap;
-}
+td{color:var(--ink2)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+td.wrap{white-space:normal}
+td:first-child.plain{font-weight:400;color:var(--ink2)}
+kbd{font-family:inherit;font-size:inherit;color:inherit;background:none;border:none;padding:0}
 
 /* ---------- cards ---------- */
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
-.card b{display:block;font-size:14.5px;margin-bottom:4px}
-.card span{font-size:13.5px;color:var(--ink-soft)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.card b{display:block;font-size:15px;margin-bottom:5px;letter-spacing:-.01em}
+.card span{font-size:14px;color:var(--ink2)}
 
-/* ---------- lists ---------- */
-ul.feats{list-style:none;margin:12px 0}
-ul.feats li{padding:6px 0 6px 22px;position:relative;color:#33302a}
-ul.feats li::before{content:"";position:absolute;left:4px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.75}
-ol.steps{list-style:none;counter-reset:step;margin:14px 0}
-ol.steps li{counter-increment:step;position:relative;padding:0 0 18px 44px}
+/* ---------- definition rows ---------- */
+.defs{margin:16px 0}
+.defs .row{display:grid;grid-template-columns:216px 1fr;gap:28px;padding:17px 0;border-bottom:1px solid var(--line)}
+.defs .row:first-child{border-top:1px solid var(--line)}
+.defs .row dt,.defs .row .t{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.defs .row dd,.defs .row .d{font-size:15px;color:var(--ink2)}
+
+/* ---------- steps ---------- */
+ol.steps{list-style:none;counter-reset:step;margin:18px 0}
+ol.steps li{counter-increment:step;position:relative;padding:0 0 26px 46px}
+ol.steps li:last-child{padding-bottom:4px}
 ol.steps li::before{
-  content:counter(step);position:absolute;left:0;top:1px;
-  width:27px;height:27px;border-radius:50%;background:var(--ink);color:#fff;
+  content:counter(step);position:absolute;left:0;top:0;
+  width:28px;height:28px;border-radius:50%;background:var(--dark);color:#fff;
   font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
 }
-ol.steps li::after{content:"";position:absolute;left:13px;top:32px;bottom:2px;width:1px;background:var(--line)}
+ol.steps li::after{content:"";position:absolute;left:13.5px;top:34px;bottom:4px;width:1px;background:var(--line)}
 ol.steps li:last-child::after{display:none}
-ol.steps li b{display:block;margin-bottom:2px}
-ol.steps li span{color:var(--ink-soft);font-size:14.5px}
+ol.steps li b{display:block;margin-bottom:2px;font-size:15.5px;padding-top:2px}
+ol.steps li span{color:var(--ink2);font-size:14.5px}
 
 /* ---------- callouts ---------- */
-.callout{border-radius:var(--radius);padding:13px 16px;margin:16px 0;font-size:14.5px;line-height:1.65;background:var(--note-bg);border-left:4px solid var(--note-line)}
-.callout .lb{font-weight:800;font-size:13px;letter-spacing:.03em;display:block;margin-bottom:3px}
-.callout.note{background:var(--note-bg);border-color:var(--note-line)}.callout.note .lb{color:var(--note-line)}
-.callout.warn{background:var(--warn-bg);border-color:var(--warn-line)}.callout.warn .lb{color:#b45309}
-.callout.key{background:var(--key-bg);border-color:var(--key-line)}.callout.key .lb{color:var(--key-line)}
-.capture{
-  border:1.5px dashed #d6cfc0;border-radius:var(--radius);
-  padding:26px 16px;margin:16px 0;text-align:center;color:var(--ink-mute);
-  font-size:13.5px;background:#fcfbf8;
+.callout{
+  background:var(--surface);border-left:3px solid var(--accent);
+  border-radius:10px;padding:16px 22px;margin:22px 0;
+  font-size:15px;line-height:1.75;color:#3f3f46;
 }
-.capture::before{content:"🖼";display:block;font-size:20px;margin-bottom:6px;opacity:.8}
+.callout .lb{font-weight:800;font-size:13px;letter-spacing:.02em;display:block;margin-bottom:4px;color:var(--accent)}
+.callout.dark{
+  background:var(--dark);border-left:none;border-radius:var(--radius);
+  color:#e4e4e7;padding:18px 26px;
+}
+.callout.dark .lb{color:#ff6a3d}
+.callout a{color:inherit}
+.capture{
+  border:1.5px dashed #d4d4d8;border-radius:var(--radius);
+  padding:28px 16px;margin:20px 0;text-align:center;color:var(--mute);
+  font-size:13.5px;background:#fafafa;
+}
+.capture::before{content:"🖼";display:block;font-size:20px;margin-bottom:6px;opacity:.75}
 
 /* ---------- faq ---------- */
-.faq{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:12px 0}
-.faq .q{font-weight:700;margin-bottom:6px}
-.faq .q::before{content:"Q. ";color:var(--accent)}
-.faq .a{font-size:14.5px;color:#33302a}
-.faq .a::before{content:"A. ";font-weight:700;color:var(--ink-mute)}
+.faq{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:14px 0}
+.faq .q{font-weight:800;font-size:16px;letter-spacing:-.01em;margin-bottom:8px}
+.faq .a{font-size:14.5px;color:var(--ink2)}
 
 /* ---------- footer ---------- */
-footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:var(--ink-mute);font-size:13px;line-height:1.8}
+footer{
+  margin-top:88px;padding-top:26px;border-top:1px solid var(--line);
+  color:var(--mute);font-size:13px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
 
 /* ---------- responsive ---------- */
 @media (max-width:960px){
@@ -165,18 +171,20 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   .sidebar{
     position:fixed;left:0;top:0;bottom:0;z-index:50;height:100vh;
     transform:translateX(-100%);transition:transform .2s ease;
-    box-shadow:4px 0 24px rgba(0,0,0,.08);background:var(--bg);
+    box-shadow:4px 0 24px rgba(0,0,0,.08);
   }
   #nav-toggle:checked ~ .layout .sidebar{transform:translateX(0)}
   .nav-btn{
     display:flex;align-items:center;gap:8px;
     position:fixed;top:14px;left:14px;z-index:60;cursor:pointer;
-    background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    background:#fff;border:1px solid var(--line);border-radius:10px;
     padding:8px 13px;font-size:13.5px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.06);
   }
-  .content{padding:76px 20px 72px}
-  .hero h1{font-size:27px}
+  .content{padding:80px 22px 72px}
+  .hero h1{font-size:29px}
+  article h3{font-size:25px}
   .cards{grid-template-columns:1fr}
+  .defs .row{grid-template-columns:1fr;gap:4px;padding:14px 0}
   td:first-child{white-space:normal}
 }
 </style>
@@ -198,7 +206,7 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <a href="#s0104"><span class="no">1.4</span>첫 화면까지</a>
   </div>
   <div class="nav-group">
-    <div class="gname">02 워크플로우 에디터</div>
+    <div class="gname">02 워크플로우</div>
     <a href="#s0201"><span class="no">2.1</span>에디터 구성</a>
     <a href="#s0202"><span class="no">2.2</span>노드 기반 작업 개념</a>
     <a href="#s0203"><span class="no">2.2.1</span>단축키</a>
@@ -219,7 +227,7 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <a href="#s0403"><span class="no">4.2</span>조직 관리자용 메뉴</a>
   </div>
   <div class="nav-group">
-    <div class="gname">05 Wilson · AI 에이전트</div>
+    <div class="gname">05 에이전트 Wilson</div>
     <a href="#s0501"><span class="no">5.0</span>Wilson이란?</a>
     <a href="#s0502"><span class="no">5.1</span>Assistant</a>
     <a href="#s0503"><span class="no">5.2</span>Workspace</a>
@@ -243,7 +251,7 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 
 <header class="hero">
   <div class="badges">
-    <span class="badge accent">v.0.1 · 26-08-14</span>
+    <span class="badge">v.0.1 · 26-08-14</span>
     <span class="badge">Living Document</span>
   </div>
   <h1>TabTo 서비스 매뉴얼</h1>
@@ -254,8 +262,9 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 <div class="chapter" id="ch01"><span class="num">01</span><h2>시작하기</h2><span class="chapter-line"></span></div>
 
 <article id="s0101">
-  <div class="kicker">1.1 · 비주얼 AI 워크스페이스</div>
+  <div class="crumb">01 시작하기<span class="sep">/</span><b>TabTo란?</b></div>
   <h3>TabTo란?</h3>
+  <div class="sub">1.1 · 비주얼 AI 워크스페이스</div>
   <p>TabTo는 비주얼 AI 워크스페이스입니다. 노드를 연결해 이미지·영상·음악·3D 결과물을 생성하는 작업 환경을 제공합니다. 입력, 생성, 가공, 출력을 담당하는 노드를 캔버스에 배치하고 서로 연결하면, 연결된 순서에 따라 순차적으로 작업이 실행됩니다.</p>
 
   <h4>주요 특징</h4>
@@ -267,23 +276,24 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   </div>
 
   <h4>제작 가능한 결과물</h4>
-  <div class="cards">
-    <div class="card"><b>텍스트 기반 이미지 생성</b><span>프롬프트만으로 이미지를 생성하고, 생성한 이미지를 편집·합성·업스케일합니다.</span></div>
-    <div class="card"><b>이미지 기반 영상 생성</b><span>정지 이미지를 영상으로 변환하고, 음원을 연결해 입 모양을 동기화한 인물 영상을 제작합니다.</span></div>
-    <div class="card"><b>이미지 기반 3D·월드 생성</b><span>이미지 한 장에서 3D 모델을 추출하거나 파노라마 형태의 3D 월드를 생성합니다.</span></div>
-    <div class="card"><b>오디오 생성</b><span>프롬프트로 음악과 효과음을 생성하고, 영상 작업의 사운드로 연결합니다.</span></div>
-    <div class="card"><b>리얼타임 작업</b><span>웹캠 등 실시간 인풋 활용, 생성한 비주얼을 TouchDesigner·언리얼 등 외부 프로그램으로 실시간 송출합니다.</span></div>
+  <div class="defs">
+    <div class="row"><div class="t">텍스트 기반 이미지 생성</div><div class="d">프롬프트만으로 이미지를 생성하고, 생성한 이미지를 편집·합성·업스케일합니다.</div></div>
+    <div class="row"><div class="t">이미지 기반 영상 생성</div><div class="d">정지 이미지를 영상으로 변환하고, 음원을 연결해 입 모양을 동기화한 인물 영상을 제작합니다.</div></div>
+    <div class="row"><div class="t">이미지 기반 3D·월드 생성</div><div class="d">이미지 한 장에서 3D 모델을 추출하거나 파노라마 형태의 3D 월드를 생성합니다.</div></div>
+    <div class="row"><div class="t">오디오 생성</div><div class="d">프롬프트로 음악과 효과음을 생성하고, 영상 작업의 사운드로 연결합니다.</div></div>
+    <div class="row"><div class="t">리얼타임 작업</div><div class="d">웹캠 등 실시간 인풋 활용, 생성한 비주얼을 TouchDesigner·언리얼 등 외부 프로그램으로 실시간 송출합니다.</div></div>
   </div>
 
-  <div class="callout note"><span class="lb">참고</span>랜딩페이지의 "쇼케이스 보기"에서 실제 제작 사례를 확인할 수 있습니다.</div>
+  <div class="callout"><span class="lb">참고</span>랜딩페이지의 "쇼케이스 보기"에서 실제 제작 사례를 확인할 수 있습니다.</div>
 </article>
 
 <article id="s0102">
-  <div class="kicker">1.2 · Sign Up</div>
+  <div class="crumb">01 시작하기<span class="sep">/</span><b>회원가입</b></div>
   <h3>회원가입</h3>
+  <div class="sub">1.2 · Sign Up</div>
   <p>이메일로 가입하고 인증 링크를 눌러 로그인합니다.</p>
 
-  <div class="callout warn"><span class="lb">⚠ 가입 전 확인 사항</span>회사·팀 단위로 사용하는 경우 회사 도메인 이메일로 가입하는 것을 권장합니다. 조직에 합류하려면 조직 관리자(Admin)가 발급한 참여 코드가 필요합니다. 가입 전에 관리자에게 참여 코드를 요청하세요.</div>
+  <div class="callout dark"><span class="lb">가입 전 확인 사항</span>회사·팀 단위로 사용하는 경우 회사 도메인 이메일로 가입하는 것을 권장합니다. 조직에 합류하려면 조직 관리자(Admin)가 발급한 참여 코드가 필요합니다. 가입 전에 관리자에게 참여 코드를 요청하세요.</div>
 
   <h4>가입 순서</h4>
   <ol class="steps">
@@ -301,13 +311,14 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <tr><td class="wrap">이미 가입된 이메일 안내</td><td class="wrap">하단의 "로그인"으로 이동해 로그인합니다</td></tr>
   </table></div>
 
-  <div class="callout key"><span class="lb">핵심</span>이메일 인증을 완료하기 전에는 로그인할 수 없습니다.</div>
-  <div class="callout note"><span class="lb">참고</span>메일이 수신되지 않은 경우 스팸함을 확인하세요.</div>
+  <div class="callout"><span class="lb">핵심</span>이메일 인증을 완료하기 전에는 로그인할 수 없습니다.</div>
+  <div class="callout"><span class="lb">참고</span>메일이 수신되지 않은 경우 스팸함을 확인하세요.</div>
 </article>
 
 <article id="s0103">
-  <div class="kicker">1.3 · Approval</div>
+  <div class="crumb">01 시작하기<span class="sep">/</span><b>승인 방법</b></div>
   <h3>승인 방법</h3>
+  <div class="sub">1.3 · Approval</div>
   <p>회원가입 절차를 완료하면 참여 코드 입력 화면이 표시됩니다. 이후 절차는 조직 내 역할에 따라 다릅니다.</p>
   <div class="capture">캡처 예정: 참여 코드 입력 화면 (Enter join code)</div>
 
@@ -318,7 +329,7 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <li><b>담당자가 관리자(Admin) 권한을 부여합니다</b></li>
     <li><b>권한 부여가 완료될 때까지 대기합니다</b></li>
   </ol>
-  <div class="callout note"><span class="lb">참고</span>구성원의 조직 합류는 참여 코드로 진행됩니다. 권한 부여 후 <a href="#s0403">4.2 Organization</a>에서 참여 코드를 확인해 구성원에게 전달하세요. 관리자 권한으로 수행하는 조직·구성원 관리는 4장 대시보드를 참고하세요.</div>
+  <div class="callout"><span class="lb">참고</span>구성원의 조직 합류는 참여 코드로 진행됩니다. 권한 부여 후 <a href="#s0403">4.2 Organization</a>에서 참여 코드를 확인해 구성원에게 전달하세요. 관리자 권한으로 수행하는 조직·구성원 관리는 4장 대시보드를 참고하세요.</div>
 
   <h4>조직 내 일반 사용자 (Member)</h4>
   <ol class="steps">
@@ -326,12 +337,13 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <li><b>"참여하고 로그인"을 누릅니다</b></li>
     <li><b>즉시 승인되어 바로 사용할 수 있습니다</b></li>
   </ol>
-  <div class="callout note"><span class="lb">참고</span>참여 코드 없이 로그인을 시도하면 "계정이 관리자 승인을 기다리고 있습니다."라는 안내가 표시됩니다. 이 경우 조직 관리자에게 참여 코드를 요청해 입력하세요.</div>
+  <div class="callout"><span class="lb">참고</span>참여 코드 없이 로그인을 시도하면 "계정이 관리자 승인을 기다리고 있습니다."라는 안내가 표시됩니다. 이 경우 조직 관리자에게 참여 코드를 요청해 입력하세요.</div>
 </article>
 
 <article id="s0104">
-  <div class="kicker">1.4 · Getting Started</div>
+  <div class="crumb">01 시작하기<span class="sep">/</span><b>첫 화면까지</b></div>
   <h3>첫 화면까지</h3>
+  <div class="sub">1.4 · Getting Started</div>
   <p>작업 화면을 여는 순서는 다음과 같습니다.</p>
   <h4>다섯 단계</h4>
   <ol class="steps">
@@ -343,30 +355,32 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   </ol>
 </article>
 
-<!-- ===================== 02 워크플로우 에디터 ===================== -->
-<div class="chapter" id="ch02"><span class="num">02</span><h2>워크플로우 에디터</h2><span class="chapter-line"></span></div>
+<!-- ===================== 02 워크플로우 ===================== -->
+<div class="chapter" id="ch02"><span class="num">02</span><h2>워크플로우</h2><span class="chapter-line"></span></div>
 
 <article id="s0201">
-  <div class="kicker">2.1 · Editor</div>
+  <div class="crumb">02 워크플로우<span class="sep">/</span><b>워크플로우 에디터 구성</b></div>
   <h3>워크플로우 에디터 구성</h3>
+  <div class="sub">2.1 · Editor</div>
   <p>새 워크플로우를 열면 화면이 다음과 같이 구성됩니다.</p>
   <div class="capture">캡처 예정: 에디터 전체 화면 (번호 오버레이)</div>
   <div class="tbl-wrap"><table>
     <tr><th>번호</th><th>위치</th><th>기능</th></tr>
-    <tr><td>1</td><td>가운데 영역</td><td class="wrap">캔버스 — 노드를 배치하고 연결하는 작업 영역</td></tr>
-    <tr><td>2</td><td>좌측 상단 툴바</td><td class="wrap">워크플로우 이름 및 저장·내보내기·공유 버튼</td></tr>
-    <tr><td>3</td><td>우측 상단 배지</td><td class="wrap">크레딧 잔액 — 생성이 실행될 때마다 자동으로 갱신됩니다</td></tr>
-    <tr><td>4</td><td>좌측면 상단 패널</td><td class="wrap">Assets — 생성 결과물 보관함 (Input / Output / Picked)</td></tr>
-    <tr><td>5</td><td>중앙 하단 패널</td><td class="wrap">Node Templates — 자주 사용하는 노드 구성을 저장합니다</td></tr>
-    <tr><td>6</td><td>좌측 하단 툴바</td><td class="wrap">캔버스 제어 — 확대/축소, 화면 맞춤 등 캔버스 조작 버튼 모음</td></tr>
-    <tr><td>7</td><td>우측 하단</td><td class="wrap">미니맵 — 캔버스 전체 구성을 축소해 표시하며, 현재 보고 있는 영역을 확인합니다</td></tr>
+    <tr><td class="plain">1</td><td class="wrap">가운데 영역</td><td class="wrap"><b>캔버스</b> — 노드를 배치하고 연결하는 작업 영역</td></tr>
+    <tr><td class="plain">2</td><td class="wrap">좌측 상단 툴바</td><td class="wrap">워크플로우 이름 및 저장·내보내기·공유 버튼</td></tr>
+    <tr><td class="plain">3</td><td class="wrap">우측 상단 배지</td><td class="wrap"><b>크레딧 잔액</b> — 생성이 실행될 때마다 자동으로 갱신됩니다</td></tr>
+    <tr><td class="plain">4</td><td class="wrap">좌측면 상단 패널</td><td class="wrap"><b>Assets</b> — 생성 결과물 보관함 (Input / Output / Picked)</td></tr>
+    <tr><td class="plain">5</td><td class="wrap">중앙 하단 패널</td><td class="wrap"><b>Node Templates</b> — 자주 사용하는 노드 구성을 저장합니다</td></tr>
+    <tr><td class="plain">6</td><td class="wrap">좌측 하단 툴바</td><td class="wrap"><b>캔버스 제어</b> — 확대/축소, 화면 맞춤 등 캔버스 조작 버튼 모음</td></tr>
+    <tr><td class="plain">7</td><td class="wrap">우측 하단</td><td class="wrap"><b>미니맵</b> — 캔버스 전체 구성을 축소해 표시하며, 현재 보고 있는 영역을 확인합니다</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">참고</span>작업은 자동 저장됩니다. 기본 1분 간격이며, 화면을 벗어날 때 추가로 저장됩니다. 저장 버튼을 우클릭하면 자동 저장 간격을 변경할 수 있습니다. 중요한 시점에는 <kbd>Ctrl + S</kbd>로 직접 저장하는 것을 권장합니다.</div>
+  <div class="callout"><span class="lb">참고</span>작업은 자동 저장됩니다. 기본 1분 간격이며, 화면을 벗어날 때 추가로 저장됩니다. 저장 버튼을 우클릭하면 자동 저장 간격을 변경할 수 있습니다. 중요한 시점에는 Ctrl + S로 직접 저장하는 것을 권장합니다.</div>
 </article>
 
 <article id="s0202">
-  <div class="kicker">2.2 · Node Concept</div>
+  <div class="crumb">02 워크플로우<span class="sep">/</span><b>노드 기반 작업 개념</b></div>
   <h3>노드 기반 작업 개념</h3>
+  <div class="sub">2.2 · Node Concept</div>
   <p>노드를 배치하고 연결하면 연결된 순서대로 작업이 실행됩니다.</p>
 
   <h4>노드의 4가지 역할</h4>
@@ -380,41 +394,43 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   <div class="capture">캡처 예정: 노드 4역할 연결 예시</div>
 
   <h4>노드 연결 방법</h4>
-  <ul class="feats">
-    <li><b>핸들에서 핸들로</b> — 노드 가장자리의 핸들에서 다른 노드의 핸들로 드래그하면 연결선이 생성됩니다.</li>
-    <li><b>데이터 타입이 일치할 때만</b> — 이미지 출력은 이미지 입력 핸들에, 텍스트 출력은 텍스트 입력 핸들에만 연결됩니다. 타입이 맞지 않는 핸들로 드래그하면 연결선이 생성되지 않습니다.</li>
-    <li><b>기존 연결의 교체</b> — 이미 연결선이 있는 입력 핸들에 새 연결을 시도하면 기존 연결이 교체됩니다.</li>
-  </ul>
+  <div class="defs">
+    <div class="row"><div class="t">핸들에서 핸들로</div><div class="d">노드 가장자리의 핸들에서 다른 노드의 핸들로 드래그하면 연결선이 생성됩니다.</div></div>
+    <div class="row"><div class="t">데이터 타입이 일치할 때만</div><div class="d">이미지 출력은 이미지 입력 핸들에, 텍스트 출력은 텍스트 입력 핸들에만 연결됩니다. 타입이 맞지 않는 핸들로 드래그하면 연결선이 생성되지 않습니다.</div></div>
+    <div class="row"><div class="t">기존 연결의 교체</div><div class="d">이미 연결선이 있는 입력 핸들에 새 연결을 시도하면 기존 연결이 교체됩니다.</div></div>
+  </div>
 
-  <div class="callout warn"><span class="lb">⚠ 실행 버튼의 위치</span>실행 버튼은 Generation 노드가 아닌 Output 노드에 있습니다. 프롬프트·모델·옵션 설정은 Generation 노드에서 수행하고, 실행 버튼인 Generate는 뒤에 연결된 Output 노드에 있습니다. 따라서 Generation 노드 → Output 노드 순으로 연결해야 실행할 수 있습니다.</div>
+  <div class="callout dark"><span class="lb">실행 버튼의 위치</span>실행 버튼은 Generation 노드가 아닌 Output 노드에 있습니다. 프롬프트·모델·옵션 설정은 Generation 노드에서 수행하고, 실행 버튼인 Generate는 뒤에 연결된 Output 노드에 있습니다. 따라서 Generation 노드 → Output 노드 순으로 연결해야 실행할 수 있습니다.</div>
 </article>
 
 <article id="s0203">
-  <div class="kicker">2.2.1 · Shortcuts</div>
+  <div class="crumb">02 워크플로우<span class="sep">/</span><b>단축키</b></div>
   <h3>단축키</h3>
+  <div class="sub">2.2.1 · Shortcuts</div>
   <p>캔버스에서 자주 사용하는 단축키입니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>동작</th><th>Windows</th><th>Mac</th></tr>
-    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td><kbd>Tab</kbd> 또는 우클릭</td><td>동일</td></tr>
-    <tr><td class="wrap">삭제</td><td><kbd>Delete</kbd> / <kbd>Backspace</kbd> / <kbd>X</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">복사 / 붙여넣기</td><td><kbd>Ctrl+C</kbd> / <kbd>Ctrl+V</kbd></td><td><kbd>⌘C</kbd> / <kbd>⌘V</kbd></td></tr>
-    <tr><td class="wrap">복제</td><td><kbd>Shift + D</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">되돌리기</td><td><kbd>Ctrl + Z</kbd></td><td><kbd>⌘Z</kbd></td></tr>
-    <tr><td class="wrap">다시 실행</td><td><kbd>Ctrl+Shift+Z</kbd> 또는 <kbd>Ctrl+Y</kbd></td><td><kbd>⌘⇧Z</kbd></td></tr>
-    <tr><td class="wrap">저장</td><td><kbd>Ctrl + S</kbd></td><td><kbd>⌘S</kbd></td></tr>
-    <tr><td class="wrap">그룹 묶기 / 해제</td><td><kbd>Ctrl+G</kbd> / <kbd>Ctrl+Shift+G</kbd></td><td><kbd>⌘G</kbd> / <kbd>⌘⇧G</kbd></td></tr>
-    <tr><td class="wrap">선택 노드 자동 정렬</td><td><kbd>Shift + A</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">선택 노드로 화면 맞춤</td><td><kbd>F</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">다중 선택</td><td class="wrap"><kbd>Shift</kbd> + 클릭 또는 빈 영역 좌클릭 드래그(박스 선택)</td><td>동일</td></tr>
+    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td class="wrap">Tab 또는 우클릭</td><td>동일</td></tr>
+    <tr><td class="wrap">삭제</td><td class="wrap">Delete / Backspace / X</td><td>동일</td></tr>
+    <tr><td class="wrap">복사 / 붙여넣기</td><td class="wrap">Ctrl+C / Ctrl+V</td><td>⌘C / ⌘V</td></tr>
+    <tr><td class="wrap">복제</td><td class="wrap">Shift + D</td><td>동일</td></tr>
+    <tr><td class="wrap">되돌리기</td><td class="wrap">Ctrl + Z</td><td>⌘Z</td></tr>
+    <tr><td class="wrap">다시 실행</td><td class="wrap">Ctrl+Shift+Z 또는 Ctrl+Y</td><td>⌘⇧Z</td></tr>
+    <tr><td class="wrap">저장</td><td class="wrap">Ctrl + S</td><td>⌘S</td></tr>
+    <tr><td class="wrap">그룹 묶기 / 해제</td><td class="wrap">Ctrl+G / Ctrl+Shift+G</td><td>⌘G / ⌘⇧G</td></tr>
+    <tr><td class="wrap">선택 노드 자동 정렬</td><td class="wrap">Shift + A</td><td>동일</td></tr>
+    <tr><td class="wrap">선택 노드로 화면 맞춤</td><td class="wrap">F</td><td>동일</td></tr>
+    <tr><td class="wrap">다중 선택</td><td class="wrap">Shift + 클릭 또는 빈 영역 좌클릭 드래그(박스 선택)</td><td>동일</td></tr>
     <tr><td class="wrap">화면 이동</td><td class="wrap">휠클릭 또는 우클릭 드래그</td><td>동일</td></tr>
     <tr><td class="wrap">확대 / 축소</td><td class="wrap">휠 스크롤 / 트랙패드 핀치</td><td>동일</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">참고</span>노드 검색은 Tab 메뉴 내부에서 수행합니다. 메뉴를 연 상태에서 이름을 입력하면 검색됩니다. 빈 영역의 좌클릭 드래그는 선택 동작이며, 화면 이동에는 휠클릭 또는 우클릭 드래그를 사용합니다. 노드를 2개 이상 선택하면 정렬 툴바가 표시됩니다. 가로 정렬, 세로 정렬, 그룹 묶기를 지원합니다.</div>
+  <div class="callout"><span class="lb">참고</span>노드 검색은 Tab 메뉴 내부에서 수행합니다. 메뉴를 연 상태에서 이름을 입력하면 검색됩니다. 빈 영역의 좌클릭 드래그는 선택 동작이며, 화면 이동에는 휠클릭 또는 우클릭 드래그를 사용합니다. 노드를 2개 이상 선택하면 정렬 툴바가 표시됩니다. 가로 정렬, 세로 정렬, 그룹 묶기를 지원합니다.</div>
 </article>
 
 <article id="s0204">
-  <div class="kicker">2.3 · 75종</div>
+  <div class="crumb">02 워크플로우<span class="sep">/</span><b>활용 가능 노드</b></div>
   <h3>활용 가능 노드</h3>
+  <div class="sub">2.3 · 75종</div>
   <p>노드는 4개 대분류 아래 75종으로 구성됩니다. 이 절에서는 분류별 구성을 확인하고, 전체 목록은 <a href="#s0603">부록 6.3</a>을 참조하세요.</p>
   <div class="capture">캡처 예정: 노드 추가 메뉴 펼친 화면</div>
 
@@ -446,31 +462,32 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   </table></div>
 
   <h4>Output (7종)</h4>
-  <ul class="feats">
-    <li><b>구성</b> — Text / Image / Video / Audio / 3D / World / Spout(TouchDesigner·언리얼로 실시간 송출)</li>
-  </ul>
-  <div class="callout key"><span class="lb">핵심</span>실행 버튼 Generate는 Output 노드에 있습니다.</div>
+  <div class="defs">
+    <div class="row"><div class="t">구성</div><div class="d">Text / Image / Video / Audio / 3D / World / Spout(TouchDesigner·언리얼로 실시간 송출)</div></div>
+  </div>
+  <div class="callout"><span class="lb">핵심</span>실행 버튼 Generate는 Output 노드에 있습니다.</div>
 
   <h4>Utility (7분류 45종)</h4>
   <div class="tbl-wrap"><table>
     <tr><th>분류 (메뉴 경로)</th><th>개수</th><th>대표 노드</th></tr>
-    <tr><td class="wrap">Prompt Modifiers</td><td>6</td><td class="wrap">Prompt Enhancer(프롬프트 보강), DSLR/Cine Camera(촬영 설정→프롬프트), Camera Angle</td></tr>
-    <tr><td class="wrap">Image Tools</td><td>4</td><td class="wrap">Image Crop, Image Resize, 비교 슬라이더, 종횡비 계산기</td></tr>
-    <tr><td class="wrap">Image Tools → Image Processing</td><td>10</td><td class="wrap">Color Correction, Color LUT, Composite(합성), RMBG(배경 제거), Physical Glow</td></tr>
-    <tr><td class="wrap">Audio</td><td>3</td><td class="wrap">Audio Analyzer(오디오 분석), Audio Ring / Particle(오디오 반응 비주얼)</td></tr>
-    <tr><td class="wrap">Routing</td><td>5</td><td class="wrap">Reroute(연결선 정리), Text/Image/Video/Audio Switcher(입력 전환)</td></tr>
-    <tr><td class="wrap">Canvas &amp; Annotation</td><td>8</td><td class="wrap">Notes(메모), Group(그룹 컨테이너), 화살표·도형 마커</td></tr>
-    <tr><td class="wrap">Video</td><td>2</td><td class="wrap">Video Editor(클립 편집·병합), Video Comparison</td></tr>
-    <tr><td class="wrap">Batch Processing</td><td>8</td><td class="wrap">폴더 단위 일괄 생성 — Batch I2I / Vision / I2V 및 입력·미리보기</td></tr>
+    <tr><td class="wrap">Prompt Modifiers</td><td class="plain">6</td><td class="wrap">Prompt Enhancer(프롬프트 보강), DSLR/Cine Camera(촬영 설정→프롬프트), Camera Angle</td></tr>
+    <tr><td class="wrap">Image Tools</td><td class="plain">4</td><td class="wrap">Image Crop, Image Resize, 비교 슬라이더, 종횡비 계산기</td></tr>
+    <tr><td class="wrap">Image Tools → Image Processing</td><td class="plain">10</td><td class="wrap">Color Correction, Color LUT, Composite(합성), RMBG(배경 제거), Physical Glow</td></tr>
+    <tr><td class="wrap">Audio</td><td class="plain">3</td><td class="wrap">Audio Analyzer(오디오 분석), Audio Ring / Particle(오디오 반응 비주얼)</td></tr>
+    <tr><td class="wrap">Routing</td><td class="plain">5</td><td class="wrap">Reroute(연결선 정리), Text/Image/Video/Audio Switcher(입력 전환)</td></tr>
+    <tr><td class="wrap">Canvas &amp; Annotation</td><td class="plain">8</td><td class="wrap">Notes(메모), Group(그룹 컨테이너), 화살표·도형 마커</td></tr>
+    <tr><td class="wrap">Video</td><td class="plain">2</td><td class="wrap">Video Editor(클립 편집·병합), Video Comparison</td></tr>
+    <tr><td class="wrap">Batch Processing</td><td class="plain">8</td><td class="wrap">폴더 단위 일괄 생성 — Batch I2I / Vision / I2V 및 입력·미리보기</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">상황별 노드 선택</span>배경 제거는 RMBG, 이미지 다수를 일괄 영상화할 때는 Batch I2V(크레딧이 대량 소모됩니다), 프롬프트 작성 보조는 Prompt Enhancer를 사용합니다.</div>
+  <div class="callout"><span class="lb">상황별 노드 선택</span>배경 제거는 RMBG, 이미지 다수를 일괄 영상화할 때는 Batch I2V(크레딧이 대량 소모됩니다), 프롬프트 작성 보조는 Prompt Enhancer를 사용합니다.</div>
 </article>
 
 <article id="s0205">
-  <div class="kicker">2.4 · 207종</div>
+  <div class="crumb">02 워크플로우<span class="sep">/</span><b>활용 가능 모델</b></div>
   <h3>활용 가능 모델</h3>
+  <div class="sub">2.4 · 207종</div>
   <p>Generation 노드를 추가한 후 노드 내부에서 모델을 선택합니다. 동일한 텍스트→이미지 작업이라도 모델에 따라 결과물의 스타일, 처리 속도, 비용이 다릅니다.</p>
-  <div class="callout note"><span class="lb">참고</span>모델은 현재 207종이며 수시로 추가·변경됩니다. 전체 목록은 <a href="#s0604">부록 6.4</a>에 있으며, 최신 기준은 관리자의 "모델 노출 설정"을 따릅니다. 관리자 설정에 따라 화면에 표시되는 모델이 다를 수 있습니다.</div>
+  <div class="callout"><span class="lb">참고</span>모델은 현재 207종이며 수시로 추가·변경됩니다. 전체 목록은 <a href="#s0604">부록 6.4</a>에 있으며, 최신 기준은 관리자의 "모델 노출 설정"을 따릅니다. 관리자 설정에 따라 화면에 표시되는 모델이 다를 수 있습니다.</div>
 
   <h4>모드 7종과 대표 모델</h4>
   <div class="tbl-wrap"><table>
@@ -490,8 +507,9 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 <div class="chapter" id="ch03"><span class="num">03</span><h2>작업공간</h2><span class="chapter-line"></span></div>
 
 <article id="s0301">
-  <div class="kicker">3.1 · My Files</div>
+  <div class="crumb">03 작업공간<span class="sep">/</span><b>내 파일 · My Files</b></div>
   <h3>내 파일 · My Files</h3>
+  <div class="sub">3.1</div>
   <p>로그인 후 처음 도착하는 화면이 작업공간입니다. 왼쪽 메뉴는 위에서부터 프로젝트 / 내 파일 / 즐겨찾기 / 에셋 순으로 구성되며, 하단 커뮤니티 구역에 디스코드 링크가 있습니다. 내 파일에는 개인 워크플로우가 모두 표시되고, 최근에 수정한 항목이 상단에 정렬됩니다.</p>
   <div class="capture">캡처 예정: My Files 전체 화면</div>
 
@@ -506,12 +524,13 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <tr><td class="wrap">검색</td><td class="wrap">검색창에 이름을 입력합니다 ("워크플로우 검색")</td></tr>
     <tr><td class="wrap">보기 전환</td><td class="wrap">플로우 / 썸네일 보기 토글, "전체 워크플로우 / 개인" 필터</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">참고</span>화면 하단의 "TabTo AI 튜토리얼" 구역에서 예제를 선택하면 튜토리얼 템플릿이 열립니다.</div>
+  <div class="callout"><span class="lb">참고</span>화면 하단의 "TabTo AI 튜토리얼" 구역에서 예제를 선택하면 튜토리얼 템플릿이 열립니다.</div>
 </article>
 
 <article id="s0302">
-  <div class="kicker">3.2 · Projects</div>
+  <div class="crumb">03 작업공간<span class="sep">/</span><b>프로젝트 · Projects</b></div>
   <h3>프로젝트 · Projects</h3>
+  <div class="sub">3.2</div>
   <p>프로젝트는 팀 단위로 워크플로우를 관리하는 공간입니다.</p>
 
   <h4>내 파일과의 차이</h4>
@@ -530,48 +549,51 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <li><b>상태 필터로 조회합니다</b><span>활성 / 검토 중 / 일시 중지 / 완료 / 취소됨 / 전체 중 기본값은 "활성"입니다.</span></li>
     <li><b>공유 범위 라벨을 확인합니다</b><span>팀 프로젝트 / 엔터프라이즈 프로젝트 / 워크스페이스 프로젝트는 각각 해당 단위에서 공유된다는 의미입니다.</span></li>
   </ol>
-  <div class="callout note"><span class="lb">참고</span>개인 사용자는 프로젝트 기능을 사용하지 않아도 서비스를 이용할 수 있습니다.</div>
+  <div class="callout"><span class="lb">참고</span>개인 사용자는 프로젝트 기능을 사용하지 않아도 서비스를 이용할 수 있습니다.</div>
 </article>
 
 <article id="s0303">
-  <div class="kicker">3.3 · Favorites</div>
+  <div class="crumb">03 작업공간<span class="sep">/</span><b>즐겨찾기 · Favorites</b></div>
   <h3>즐겨찾기 · Favorites</h3>
+  <div class="sub">3.3</div>
   <p>내 파일에서 별표 아이콘을 누른 워크플로우가 자동으로 수집되는 화면입니다.</p>
-  <ul class="feats">
-    <li><b>폴더 분류</b> — "새 폴더"로 폴더를 생성해 분류할 수 있으며, 폴더의 이름 변경과 삭제도 지원합니다.</li>
-    <li><b>미분류 항목</b> — 폴더에 배정하지 않은 항목은 "최근 즐겨찾기" 구역에 표시되며, 항목에 "미분류" 라벨이 표시됩니다.</li>
-  </ul>
+  <div class="defs">
+    <div class="row"><div class="t">폴더 분류</div><div class="d">"새 폴더"로 폴더를 생성해 분류할 수 있으며, 폴더의 이름 변경과 삭제도 지원합니다.</div></div>
+    <div class="row"><div class="t">미분류 항목</div><div class="d">폴더에 배정하지 않은 항목은 "최근 즐겨찾기" 구역에 표시되며, 항목에 "미분류" 라벨이 표시됩니다.</div></div>
+  </div>
 </article>
 
 <article id="s0304">
-  <div class="kicker">3.4 · Assets</div>
+  <div class="crumb">03 작업공간<span class="sep">/</span><b>에셋 · Assets</b></div>
   <h3>에셋 · Assets</h3>
+  <div class="sub">3.4</div>
   <p>생성한 결과물(이미지·영상·오디오·3D·텍스트)이 보관되는 화면입니다.</p>
   <div class="capture">캡처 예정: Assets 그리드 뷰</div>
 
   <h4>화면 구성</h4>
-  <ul class="feats">
-    <li><b>상단 타일</b> — 이미지 / 비디오 / 오디오 / 메시 / 텍스트 / 스토리지 항목이 표시되며, 유형별 개수와 저장 용량을 확인할 수 있습니다.</li>
-    <li><b>검색·필터</b> — 검색("프롬프트, 모델, 파일명 검색...")과 필터(타입·프로바이더·프로젝트·정렬)로 결과물을 조회합니다.</li>
-    <li><b>보기 방식</b> — 그리드 / 리스트 / 그래프(연결 관계) 중에서 선택합니다.</li>
-  </ul>
+  <div class="defs">
+    <div class="row"><div class="t">상단 타일</div><div class="d">이미지 / 비디오 / 오디오 / 메시 / 텍스트 / 스토리지 항목이 표시되며, 유형별 개수와 저장 용량을 확인할 수 있습니다.</div></div>
+    <div class="row"><div class="t">검색·필터</div><div class="d">검색("프롬프트, 모델, 파일명 검색...")과 필터(타입·프로바이더·프로젝트·정렬)로 결과물을 조회합니다.</div></div>
+    <div class="row"><div class="t">보기 방식</div><div class="d">그리드 / 리스트 / 그래프(연결 관계) 중에서 선택합니다.</div></div>
+  </div>
 
   <h4>참고 사항</h4>
-  <ul class="feats">
-    <li><b>프로젝트 검수 연동</b> — 에셋 상세 화면에서 결과물을 프로젝트로 제출할 수 있습니다. 팀 관리자는 프로젝트의 선택 / 승인됨 탭에서 승인 또는 반려합니다. (<a href="#s0302">3.2 참고</a>)</li>
-    <li><b>저장 용량 한도</b> — 저장 용량에는 한도(Quota)가 적용됩니다.</li>
-    <li><b>원본 링크 만료</b> — 프로바이더가 제공하는 원본 링크는 일정 시간이 지나면 만료될 수 있습니다. TabTo가 사본을 별도로 보관하므로, 오래된 작업의 결과물도 에셋에서 다시 조회할 수 있습니다.</li>
-  </ul>
+  <div class="defs">
+    <div class="row"><div class="t">프로젝트 검수 연동</div><div class="d">에셋 상세 화면에서 결과물을 프로젝트로 제출할 수 있습니다. 팀 관리자는 프로젝트의 선택 / 승인됨 탭에서 승인 또는 반려합니다. (<a href="#s0302">3.2 참고</a>)</div></div>
+    <div class="row"><div class="t">저장 용량 한도</div><div class="d">저장 용량에는 한도(Quota)가 적용됩니다.</div></div>
+    <div class="row"><div class="t">원본 링크 만료</div><div class="d">프로바이더가 제공하는 원본 링크는 일정 시간이 지나면 만료될 수 있습니다. TabTo가 사본을 별도로 보관하므로, 오래된 작업의 결과물도 에셋에서 다시 조회할 수 있습니다.</div></div>
+  </div>
 </article>
 
 <!-- ===================== 04 대시보드 ===================== -->
 <div class="chapter" id="ch04"><span class="num">04</span><h2>대시보드</h2><span class="chapter-line"></span></div>
 
 <article id="s0401">
-  <div class="kicker">4.0 · Roles</div>
+  <div class="crumb">04 대시보드<span class="sep">/</span><b>사용자 권한</b></div>
   <h3>사용자 권한</h3>
+  <div class="sub">4.0 · Roles</div>
   <p>계정·조직·사용량을 관리하는 화면입니다. 화면 위쪽 계정 메뉴에서 Dashboard로 이동합니다.</p>
-  <div class="callout warn"><span class="lb">⚠ 주의</span>대시보드는 권한에 따라 표시되는 메뉴가 다릅니다. 화면에 일부 탭이 표시되지 않아도 정상이며, 이 장은 모든 메뉴가 표시되는 기준으로 설명합니다.</div>
+  <div class="callout dark"><span class="lb">주의</span>대시보드는 권한에 따라 표시되는 메뉴가 다릅니다. 화면에 일부 탭이 표시되지 않아도 정상이며, 이 장은 모든 메뉴가 표시되는 기준으로 설명합니다.</div>
 
   <h4>역할 2단계</h4>
   <div class="tbl-wrap"><table>
@@ -582,8 +604,9 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 </article>
 
 <article id="s0402">
-  <div class="kicker">4.1 · Member</div>
+  <div class="crumb">04 대시보드<span class="sep">/</span><b>일반 사용자용 메뉴</b></div>
   <h3>일반 사용자용 메뉴</h3>
+  <div class="sub">4.1 · Member</div>
   <p>일반 사용자 권한으로 사용하는 메뉴입니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>메뉴</th><th>기능</th></tr>
@@ -596,8 +619,9 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 </article>
 
 <article id="s0403">
-  <div class="kicker">4.2 · Admin</div>
+  <div class="crumb">04 대시보드<span class="sep">/</span><b>조직 관리자용 메뉴</b></div>
   <h3>조직 관리자용 메뉴</h3>
+  <div class="sub">4.2 · Admin</div>
   <p>조직을 운영하는 관리자가 사용하는 메뉴입니다.</p>
 
   <h4>메뉴</h4>
@@ -618,44 +642,46 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <li><b>코드를 합류 대상 구성원에게 전달합니다</b><span>사내 메신저·메일 등을 이용합니다.</span></li>
     <li><b>구성원이 코드를 입력해 합류합니다</b><span>구성원이 가입 후 안내 화면에 코드를 입력하고 "참여하고 로그인"을 누르면 즉시 조직에 합류합니다. (구성원 화면은 <a href="#s0103">1.3 승인 방법</a> 참고)</span></li>
   </ol>
-  <div class="callout warn"><span class="lb">⚠ 확인 필요</span>참여 코드의 정확한 발급 위치와 UI(코드 표시 방식, 재발급·무효화 버튼 유무, 유효기간·사용 횟수 제한)를 제품에서 확인 후 1단계를 실제 조작 순서로 교체해야 합니다.</div>
+  <div class="callout dark"><span class="lb">확인 필요</span>참여 코드의 정확한 발급 위치와 UI(코드 표시 방식, 재발급·무효화 버튼 유무, 유효기간·사용 횟수 제한)를 제품에서 확인 후 1단계를 실제 조작 순서로 교체해야 합니다.</div>
 </article>
 
-<!-- ===================== 05 Wilson ===================== -->
-<div class="chapter" id="ch05"><span class="num">05</span><h2>Wilson · AI 에이전트</h2><span class="chapter-line"></span></div>
+<!-- ===================== 05 에이전트 Wilson ===================== -->
+<div class="chapter" id="ch05"><span class="num">05</span><h2>에이전트 Wilson</h2><span class="chapter-line"></span></div>
 
 <article id="s0501">
-  <div class="kicker">5.0 · AI Agent</div>
+  <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Wilson이란?</b></div>
   <h3>Wilson이란?</h3>
+  <div class="sub">5.0 · AI Agent</div>
   <p>Wilson은 TabTo의 각 화면에 배치된 AI 에이전트입니다. 화면마다 하나씩 제공되며, 해당 화면의 업무 범위에 맞는 기능을 수행합니다. 동일한 에이전트이지만 위치에 따라 담당 역할이 다릅니다.</p>
 
   <h4>역할 4종</h4>
   <div class="tbl-wrap"><table>
     <tr><th>위치</th><th>실행 버튼</th><th>역할</th><th>지원 범위</th></tr>
-    <tr><td class="wrap">워크플로우 에디터</td><td class="wrap">AI 버튼</td><td>Assistant</td><td class="wrap">대화로 워크플로우를 설계하고, 사용자가 승인하면 캔버스에 적용합니다</td></tr>
-    <tr><td class="wrap">작업공간·즐겨찾기</td><td class="wrap">폴더 아이콘 버튼</td><td>Workspace</td><td class="wrap">작업 파일을 검색·요약하고 열어 줍니다</td></tr>
-    <tr><td class="wrap">에셋</td><td class="wrap">이미지 아이콘 버튼</td><td>Asset Librarian</td><td class="wrap">결과물을 검색합니다</td></tr>
-    <tr><td class="wrap">대시보드 (슈퍼 관리자 전용)</td><td class="wrap">차트 아이콘 버튼</td><td>Analytics</td><td class="wrap">사용량과 비용을 분석합니다</td></tr>
+    <tr><td class="wrap">워크플로우 에디터</td><td class="wrap plain">AI 버튼</td><td class="wrap"><b>Assistant</b></td><td class="wrap">대화로 워크플로우를 설계하고, 사용자가 승인하면 캔버스에 적용합니다</td></tr>
+    <tr><td class="wrap">작업공간·즐겨찾기</td><td class="wrap plain">폴더 아이콘 버튼</td><td class="wrap"><b>Workspace</b></td><td class="wrap">작업 파일을 검색·요약하고 열어 줍니다</td></tr>
+    <tr><td class="wrap">에셋</td><td class="wrap plain">이미지 아이콘 버튼</td><td class="wrap"><b>Asset Librarian</b></td><td class="wrap">결과물을 검색합니다</td></tr>
+    <tr><td class="wrap">대시보드 (슈퍼 관리자 전용)</td><td class="wrap plain">차트 아이콘 버튼</td><td class="wrap"><b>Analytics</b></td><td class="wrap">사용량과 비용을 분석합니다</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">참고</span>버튼에 마우스를 올리면 "Wilson · …" 형식으로 역할 이름이 표시됩니다. 조직에 AI 키가 설정되지 않은 경우 버튼이 표시되지 않을 수 있습니다.</div>
+  <div class="callout"><span class="lb">참고</span>버튼에 마우스를 올리면 "Wilson · …" 형식으로 역할 이름이 표시됩니다. 조직에 AI 키가 설정되지 않은 경우 버튼이 표시되지 않을 수 있습니다.</div>
 
   <h4>공통 원칙</h4>
-  <ul class="feats">
-    <li><b>사용자 확인 우선</b> — Wilson이 직접 수행하는 범위는 역할마다 다릅니다. 공통 원칙은 사용자의 확인 없이 작업 내용을 변경하지 않는다는 것입니다. 각 절에서 직접 실행하는 범위와 제안에 그치는 범위를 구분해 표시합니다.</li>
-  </ul>
+  <div class="defs">
+    <div class="row"><div class="t">사용자 확인 우선</div><div class="d">Wilson이 직접 수행하는 범위는 역할마다 다릅니다. 공통 원칙은 사용자의 확인 없이 작업 내용을 변경하지 않는다는 것입니다. 각 절에서 직접 실행하는 범위와 제안에 그치는 범위를 구분해 표시합니다.</div></div>
+  </div>
 
   <h4>슬래시 명령</h4>
-  <ul class="feats">
-    <li><b>/model</b> — 이 대화에서 사용할 AI 모델을 변경합니다. 2단계로 선택하며, 사용 가능한 모델이 2개 이상일 때만 표시됩니다.</li>
-    <li><b>/export</b> — 지금까지의 대화를 마크다운(.md) 파일로 저장합니다. 채팅 헤더의 내려받기 버튼과 동일한 기능입니다.</li>
-    <li><b>/memory</b> — Wilson이 저장한 대화 맥락(의도·요약)을 삭제합니다.</li>
-  </ul>
-  <div class="callout note"><span class="lb">참고</span>채팅 입력창에 "/"를 입력하면 명령 메뉴가 표시됩니다. 위아래 방향키로 선택하고 Enter로 실행합니다.</div>
+  <div class="defs">
+    <div class="row"><div class="t">/model</div><div class="d">이 대화에서 사용할 AI 모델을 변경합니다. 2단계로 선택하며, 사용 가능한 모델이 2개 이상일 때만 표시됩니다.</div></div>
+    <div class="row"><div class="t">/export</div><div class="d">지금까지의 대화를 마크다운(.md) 파일로 저장합니다. 채팅 헤더의 내려받기 버튼과 동일한 기능입니다.</div></div>
+    <div class="row"><div class="t">/memory</div><div class="d">Wilson이 저장한 대화 맥락(의도·요약)을 삭제합니다.</div></div>
+  </div>
+  <div class="callout"><span class="lb">참고</span>채팅 입력창에 "/"를 입력하면 명령 메뉴가 표시됩니다. 위아래 방향키로 선택하고 Enter로 실행합니다.</div>
 </article>
 
 <article id="s0502">
-  <div class="kicker">5.1 · 워크플로우 에디터</div>
+  <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Assistant</b></div>
   <h3>Assistant</h3>
+  <div class="sub">5.1 · 워크플로우 에디터</div>
   <p>에디터에서 다음과 같은 요청을 처리합니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
@@ -663,13 +689,14 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <tr><td class="wrap">"이 작업엔 어떤 모델이 좋아?"</td><td class="wrap">모델을 추천하고 예상 비용을 안내합니다</td></tr>
     <tr><td class="wrap">"이 노드 지워줘 / 복제해줘"</td><td class="wrap">노드 삭제·수정·복제를 실행합니다</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">동작 방식</span>Wilson이 제시한 설계안에는 "캔버스에 적용하기" 버튼이 함께 표시됩니다. 이 버튼을 눌러야 실제로 노드가 추가·연결·수정되며, 사용자 확인 없이 자동으로 반영되지 않습니다.</div>
+  <div class="callout"><span class="lb">동작 방식</span>Wilson이 제시한 설계안에는 "캔버스에 적용하기" 버튼이 함께 표시됩니다. 이 버튼을 눌러야 실제로 노드가 추가·연결·수정되며, 사용자 확인 없이 자동으로 반영되지 않습니다.</div>
   <div class="capture">캡처 예정: Assistant 대화 예시</div>
 </article>
 
 <article id="s0503">
-  <div class="kicker">5.2 · 작업공간·즐겨찾기</div>
+  <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Workspace</b></div>
   <h3>Workspace</h3>
+  <div class="sub">5.2 · 작업공간·즐겨찾기</div>
   <p>작업 파일을 검색·요약하고 열어 줍니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
@@ -677,12 +704,13 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <tr><td class="wrap">"이 워크플로우 뭐 하던 거였지?"</td><td class="wrap">작업 내용을 요약합니다</td></tr>
     <tr><td class="wrap">"새 워크플로우 만들어줘"</td><td class="wrap">워크플로우를 생성합니다</td></tr>
   </table></div>
-  <div class="callout warn"><span class="lb">⚠ 주의</span>파일 정리(이름 변경·삭제·이동·즐겨찾기)는 실행하지 않으며, 정리 방법을 제안하는 데 그칩니다.</div>
+  <div class="callout dark"><span class="lb">주의</span>파일 정리(이름 변경·삭제·이동·즐겨찾기)는 실행하지 않으며, 정리 방법을 제안하는 데 그칩니다.</div>
 </article>
 
 <article id="s0504">
-  <div class="kicker">5.3 · 에셋</div>
+  <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Asset Librarian</b></div>
   <h3>Asset Librarian</h3>
+  <div class="sub">5.3 · 에셋</div>
   <p>결과물을 검색합니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
@@ -691,30 +719,32 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   </table></div>
 
   <h4>알아둘 것</h4>
-  <ul class="feats">
-    <li><b>CSV 다운로드</b> — 조회 결과 표를 CSV로 다운로드할 수 있습니다. 에셋 파일 자체를 내려받는 기능은 아닙니다.</li>
-    <li><b>읽기 전용</b> — 에셋 삭제·이동·이름 변경은 지원하지 않습니다.</li>
-  </ul>
+  <div class="defs">
+    <div class="row"><div class="t">CSV 다운로드</div><div class="d">조회 결과 표를 CSV로 다운로드할 수 있습니다. 에셋 파일 자체를 내려받는 기능은 아닙니다.</div></div>
+    <div class="row"><div class="t">읽기 전용</div><div class="d">에셋 삭제·이동·이름 변경은 지원하지 않습니다.</div></div>
+  </div>
 </article>
 
 <article id="s0505">
-  <div class="kicker">5.4 · 대시보드 (슈퍼 관리자 전용)</div>
+  <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Analytics</b></div>
   <h3>Analytics</h3>
+  <div class="sub">5.4 · 대시보드 (슈퍼 관리자 전용)</div>
   <p>사용량과 비용을 분석합니다. 읽기 전용이므로 설정을 변경하지 않습니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
     <tr><td class="wrap">"이번 달 크레딧 어디에 많이 썼어?"</td><td class="wrap">사용량과 비용을 분석합니다</td></tr>
     <tr><td class="wrap">"모델별 단가 비교해줘"</td><td class="wrap">가격을 비교하고 가격 누락 및 이상 비용을 감지합니다</td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">참고</span>표시되는 비용은 미가격 모델과 환율을 반영한 추정치입니다.</div>
+  <div class="callout"><span class="lb">참고</span>표시되는 비용은 미가격 모델과 환율을 반영한 추정치입니다.</div>
 </article>
 
 <!-- ===================== 06 부록 ===================== -->
 <div class="chapter" id="ch06"><span class="num">06</span><h2>부록</h2><span class="chapter-line"></span></div>
 
 <article id="s0601">
-  <div class="kicker">6.1 · Troubleshooting</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>문제 해결</b></div>
   <h3>문제 해결</h3>
+  <div class="sub">6.1 · Troubleshooting</div>
 
   <div class="faq">
     <div class="q">노드가 연결되지 않습니다</div>
@@ -743,28 +773,30 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 </article>
 
 <article id="s0602">
-  <div class="kicker">6.2 · Shortcuts</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>단축키 전체 표</b></div>
   <h3>단축키 전체 표</h3>
+  <div class="sub">6.2 · Shortcuts</div>
   <div class="tbl-wrap"><table>
     <tr><th>동작</th><th>Windows</th><th>Mac</th></tr>
-    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td><kbd>Tab</kbd> / 우클릭</td><td>동일</td></tr>
-    <tr><td class="wrap">삭제</td><td><kbd>Delete</kbd> / <kbd>Backspace</kbd> / <kbd>X</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">복사 / 붙여넣기</td><td><kbd>Ctrl+C</kbd> / <kbd>Ctrl+V</kbd></td><td><kbd>⌘C</kbd> / <kbd>⌘V</kbd></td></tr>
-    <tr><td class="wrap">복제</td><td><kbd>Shift+D</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">되돌리기 / 다시 실행</td><td><kbd>Ctrl+Z</kbd> / <kbd>Ctrl+Shift+Z</kbd>·<kbd>Ctrl+Y</kbd></td><td><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd></td></tr>
-    <tr><td class="wrap">저장</td><td><kbd>Ctrl+S</kbd></td><td><kbd>⌘S</kbd></td></tr>
-    <tr><td class="wrap">그룹 / 해제</td><td><kbd>Ctrl+G</kbd> / <kbd>Ctrl+Shift+G</kbd></td><td><kbd>⌘G</kbd> / <kbd>⌘⇧G</kbd></td></tr>
-    <tr><td class="wrap">자동 정렬</td><td><kbd>Shift+A</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">화면 맞춤</td><td><kbd>F</kbd></td><td>동일</td></tr>
-    <tr><td class="wrap">다중 선택</td><td class="wrap"><kbd>Shift</kbd>+클릭 / 빈 영역 좌클릭 드래그(박스)</td><td>동일</td></tr>
+    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td class="wrap">Tab / 우클릭</td><td>동일</td></tr>
+    <tr><td class="wrap">삭제</td><td class="wrap">Delete / Backspace / X</td><td>동일</td></tr>
+    <tr><td class="wrap">복사 / 붙여넣기</td><td class="wrap">Ctrl+C / Ctrl+V</td><td>⌘C / ⌘V</td></tr>
+    <tr><td class="wrap">복제</td><td class="wrap">Shift+D</td><td>동일</td></tr>
+    <tr><td class="wrap">되돌리기 / 다시 실행</td><td class="wrap">Ctrl+Z / Ctrl+Shift+Z·Ctrl+Y</td><td>⌘Z / ⌘⇧Z</td></tr>
+    <tr><td class="wrap">저장</td><td class="wrap">Ctrl+S</td><td>⌘S</td></tr>
+    <tr><td class="wrap">그룹 / 해제</td><td class="wrap">Ctrl+G / Ctrl+Shift+G</td><td>⌘G / ⌘⇧G</td></tr>
+    <tr><td class="wrap">자동 정렬</td><td class="wrap">Shift+A</td><td>동일</td></tr>
+    <tr><td class="wrap">화면 맞춤</td><td class="wrap">F</td><td>동일</td></tr>
+    <tr><td class="wrap">다중 선택</td><td class="wrap">Shift+클릭 / 빈 영역 좌클릭 드래그(박스)</td><td>동일</td></tr>
     <tr><td class="wrap">화면 이동</td><td class="wrap">휠클릭·우클릭 드래그</td><td>동일</td></tr>
-    <tr><td class="wrap">메뉴 닫기</td><td><kbd>Esc</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">메뉴 닫기</td><td class="wrap">Esc</td><td>동일</td></tr>
   </table></div>
 </article>
 
 <article id="s0603">
-  <div class="kicker">6.3 · 75종</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>노드 전체 카탈로그</b></div>
   <h3>노드 전체 카탈로그</h3>
+  <div class="sub">6.3 · 75종</div>
   <p>상세 스펙(입출력 포트·파라미터·과금)은 Living Document의 '노드 카탈로그' 시트를 원본으로 합니다.</p>
 
   <h4>Input (11종)</h4>
@@ -854,7 +886,7 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <tr><td>Audio Ring</td><td class="wrap">오디오 반응 링 비주얼</td></tr>
     <tr><td>Audio Particle Reactive</td><td class="wrap">GPU 파티클 오디오 반응 비주얼</td></tr>
     <tr><td>Reroute</td><td class="wrap">연결선 경유점 (선 정리)</td></tr>
-    <tr><td>Text / Image / Video / Audio Switcher</td><td class="wrap">여러 입력 중 하나를 선택해 출력 (각 1종)</td></tr>
+    <tr><td class="wrap">Text / Image / Video / Audio Switcher</td><td class="wrap">여러 입력 중 하나를 선택해 출력 (각 1종)</td></tr>
   </table></div>
 
   <h4>Utility — Canvas &amp; Annotation (8종) · Video (2종)</h4>
@@ -880,8 +912,9 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 </article>
 
 <article id="s0604">
-  <div class="kicker">6.4 · 192종</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>모델 전체 카탈로그</b></div>
   <h3>모델 전체 카탈로그</h3>
+  <div class="sub">6.4 · 192종</div>
   <p>원본은 모델 카탈로그 시트(코드 config 기준, 활성 187종 / 비활성 5종)입니다. Slug 등 상세 정보는 시트를 참조하세요. 실제 노출 여부는 관리자의 '모델 노출 설정'에 따라 달라집니다.</p>
 
   <h4>모델 카탈로그 시트</h4>
@@ -890,38 +923,39 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
   <h4>모드별 요약</h4>
   <div class="tbl-wrap"><table>
     <tr><th>모드</th><th>개수</th><th>프로바이더</th></tr>
-    <tr><td class="wrap">T2I 텍스트→이미지</td><td>23</td><td class="wrap">fal 17 · replicate 2 · byteplus 4</td></tr>
-    <tr><td class="wrap">I2I 이미지→이미지</td><td>44</td><td class="wrap">fal 25 · replicate 11 · freepik 4 · byteplus 4</td></tr>
-    <tr><td class="wrap">T2V 텍스트→영상</td><td class="wrap">32 (비활성 3)</td><td class="wrap">fal 22 · byteplus 5 · ltx 5</td></tr>
-    <tr><td class="wrap">I2V 이미지→영상</td><td class="wrap">45 (비활성 2)</td><td class="wrap">fal 35 · replicate 3 · byteplus 5 · ltx 2</td></tr>
-    <tr><td class="wrap">V2V 영상→영상</td><td>21</td><td class="wrap">fal 17 · replicate 2 · byteplus 2</td></tr>
-    <tr><td class="wrap">T2A 텍스트→오디오</td><td>9</td><td class="wrap">fal 8 · replicate 1</td></tr>
-    <tr><td class="wrap">I2M 이미지→3D</td><td>18</td><td class="wrap">fal 17 · replicate 1</td></tr>
-    <tr><td class="wrap"><b>합계</b></td><td><b>192</b></td><td class="wrap"><b>활성 187</b></td></tr>
+    <tr><td class="wrap">T2I 텍스트→이미지</td><td class="plain">23</td><td class="wrap">fal 17 · replicate 2 · byteplus 4</td></tr>
+    <tr><td class="wrap">I2I 이미지→이미지</td><td class="plain">44</td><td class="wrap">fal 25 · replicate 11 · freepik 4 · byteplus 4</td></tr>
+    <tr><td class="wrap">T2V 텍스트→영상</td><td class="wrap plain">32 (비활성 3)</td><td class="wrap">fal 22 · byteplus 5 · ltx 5</td></tr>
+    <tr><td class="wrap">I2V 이미지→영상</td><td class="wrap plain">45 (비활성 2)</td><td class="wrap">fal 35 · replicate 3 · byteplus 5 · ltx 2</td></tr>
+    <tr><td class="wrap">V2V 영상→영상</td><td class="plain">21</td><td class="wrap">fal 17 · replicate 2 · byteplus 2</td></tr>
+    <tr><td class="wrap">T2A 텍스트→오디오</td><td class="plain">9</td><td class="wrap">fal 8 · replicate 1</td></tr>
+    <tr><td class="wrap">I2M 이미지→3D</td><td class="plain">18</td><td class="wrap">fal 17 · replicate 1</td></tr>
+    <tr><td class="wrap">합계</td><td>192</td><td class="wrap"><b>활성 187</b></td></tr>
   </table></div>
-  <div class="callout note"><span class="lb">참고</span>비활성 5종 — Seedance 1.0 Pro·Lite (T2V/byteplus) · LTX 2.3 (T2V/ltx) · Seedance 1.0 Pro·Lite I2V (I2V/byteplus)</div>
+  <div class="callout"><span class="lb">참고</span>비활성 5종 — Seedance 1.0 Pro·Lite (T2V/byteplus) · LTX 2.3 (T2V/ltx) · Seedance 1.0 Pro·Lite I2V (I2V/byteplus)</div>
 
   <h4>주요 모델 패밀리</h4>
   <div class="tbl-wrap"><table>
     <tr><th>패밀리</th><th>모드</th><th>특징</th></tr>
-    <tr><td class="wrap">FLUX (.1/.2, schnell~pro)</td><td class="wrap">T2I·I2I</td><td class="wrap">이미지 생성·편집 주력</td></tr>
-    <tr><td class="wrap">Nano Banana (1/2/Pro)</td><td class="wrap">T2I·I2I</td><td class="wrap">빠른 이미지 생성, 자연스러운 편집</td></tr>
-    <tr><td class="wrap">Seedream (4.0~5 Pro)</td><td class="wrap">T2I·I2I</td><td class="wrap">ByteDance 이미지</td></tr>
-    <tr><td class="wrap">Kling (2.5~V3, O1~O3, Avatar)</td><td class="wrap">T2V·I2V·V2V</td><td class="wrap">영상 전반 및 립싱크 아바타</td></tr>
-    <tr><td class="wrap">Veo 3 / 3.1</td><td class="wrap">T2V·I2V</td><td class="wrap">구글 고품질 영상</td></tr>
-    <tr><td class="wrap">Wan (2.1~2.7)</td><td class="wrap">T2V·I2V·V2V·T2I·I2I</td><td class="wrap">비용 효율 및 특수효과(Animate·VACE)</td></tr>
-    <tr><td class="wrap">Seedance (1.0~2.0)</td><td class="wrap">T2V·I2V·V2V</td><td class="wrap">ByteDance 영상</td></tr>
-    <tr><td class="wrap">LTX (2~2.3)</td><td class="wrap">T2V·I2V</td><td class="wrap">빠른 영상 생성</td></tr>
-    <tr><td class="wrap">Grok Imagine</td><td class="wrap">T2I·I2I·T2V·I2V·V2V</td><td class="wrap">xAI 계열</td></tr>
-    <tr><td class="wrap">Stable Audio / Lyria 2 / Beatoven / Sonauto</td><td class="wrap">T2A</td><td class="wrap">음악·효과음·보컬</td></tr>
-    <tr><td class="wrap">Tripo / Hunyuan 3D / Meshy / TripoSplat</td><td class="wrap">I2M</td><td class="wrap">3D 메시·가우시안 스플랫</td></tr>
-    <tr><td class="wrap">Magnific / Topaz / Runway</td><td class="wrap">I2I·V2V</td><td class="wrap">업스케일 전문</td></tr>
+    <tr><td class="wrap">FLUX (.1/.2, schnell~pro)</td><td class="wrap plain">T2I·I2I</td><td class="wrap">이미지 생성·편집 주력</td></tr>
+    <tr><td class="wrap">Nano Banana (1/2/Pro)</td><td class="wrap plain">T2I·I2I</td><td class="wrap">빠른 이미지 생성, 자연스러운 편집</td></tr>
+    <tr><td class="wrap">Seedream (4.0~5 Pro)</td><td class="wrap plain">T2I·I2I</td><td class="wrap">ByteDance 이미지</td></tr>
+    <tr><td class="wrap">Kling (2.5~V3, O1~O3, Avatar)</td><td class="wrap plain">T2V·I2V·V2V</td><td class="wrap">영상 전반 및 립싱크 아바타</td></tr>
+    <tr><td class="wrap">Veo 3 / 3.1</td><td class="wrap plain">T2V·I2V</td><td class="wrap">구글 고품질 영상</td></tr>
+    <tr><td class="wrap">Wan (2.1~2.7)</td><td class="wrap plain">T2V·I2V·V2V·T2I·I2I</td><td class="wrap">비용 효율 및 특수효과(Animate·VACE)</td></tr>
+    <tr><td class="wrap">Seedance (1.0~2.0)</td><td class="wrap plain">T2V·I2V·V2V</td><td class="wrap">ByteDance 영상</td></tr>
+    <tr><td class="wrap">LTX (2~2.3)</td><td class="wrap plain">T2V·I2V</td><td class="wrap">빠른 영상 생성</td></tr>
+    <tr><td class="wrap">Grok Imagine</td><td class="wrap plain">T2I·I2I·T2V·I2V·V2V</td><td class="wrap">xAI 계열</td></tr>
+    <tr><td class="wrap">Stable Audio / Lyria 2 / Beatoven / Sonauto</td><td class="wrap plain">T2A</td><td class="wrap">음악·효과음·보컬</td></tr>
+    <tr><td class="wrap">Tripo / Hunyuan 3D / Meshy / TripoSplat</td><td class="wrap plain">I2M</td><td class="wrap">3D 메시·가우시안 스플랫</td></tr>
+    <tr><td class="wrap">Magnific / Topaz / Runway</td><td class="wrap plain">I2I·V2V</td><td class="wrap">업스케일 전문</td></tr>
   </table></div>
 </article>
 
 <article id="s0605">
-  <div class="kicker">6.5 · Blender · Unreal · Spout</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>외부 연동 가이드</b></div>
   <h3>외부 연동 가이드</h3>
+  <div class="sub">6.5 · Blender · Unreal · Spout</div>
 
   <h4>Blender Bridge</h4>
   <ol class="steps">
@@ -944,12 +978,13 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
     <li><b>데스크톱 컴패니언을 실행합니다</b><span>"Launch Desktop Spout"로 실행합니다. 최초 1회 등록이 필요합니다.</span></li>
     <li><b>외부 프로그램에서 수신합니다</b><span>TouchDesigner·언리얼 등에서 Sender Name으로 수신합니다.</span></li>
   </ol>
-  <div class="callout note"><span class="lb">구성 예시</span>Audio Analyzer → Audio Particle Reactive → Spout Output 구성으로, 오디오에 반응하는 비주얼을 공연 장비에 실시간 송출할 수 있습니다.</div>
+  <div class="callout"><span class="lb">구성 예시</span>Audio Analyzer → Audio Particle Reactive → Spout Output 구성으로, 오디오에 반응하는 비주얼을 공연 장비에 실시간 송출할 수 있습니다.</div>
 </article>
 
 <article id="s0606">
-  <div class="kicker">6.6 · Glossary</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>용어 사전</b></div>
   <h3>용어 사전</h3>
+  <div class="sub">6.6 · Glossary</div>
   <div class="tbl-wrap"><table>
     <tr><th>용어</th><th>정의</th></tr>
     <tr><td class="wrap">노드 (Node)</td><td class="wrap">작업 단위 — Input / Generation / Utility / Output</td></tr>
@@ -969,14 +1004,15 @@ footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:v
 </article>
 
 <article id="s0607">
-  <div class="kicker">6.7 · Admin Guide</div>
+  <div class="crumb">06 부록<span class="sep">/</span><b>관리자 가이드</b></div>
   <h3>관리자 가이드</h3>
+  <div class="sub">6.7 · Admin Guide</div>
   <p>슈퍼 관리자 메뉴(모델 노출·가격 설정, 워크스페이스 관리 등)의 상세 조작 가이드는 별도 문서로 제공될 예정입니다.</p>
 </article>
 
 <footer>
-  근거: 08-13 md 개정판 · Living Document<br>
-  Copyright © GIANTSTEP. All Rights Reserved.
+  <span>근거: 08-13 md 개정판 · Living Document</span>
+  <span>Copyright © GIANTSTEP. All Rights Reserved.</span>
 </footer>
 
 </div>
