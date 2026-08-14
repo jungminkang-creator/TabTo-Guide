@@ -4,209 +4,303 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TabTo 서비스 매뉴얼</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <style>
+/* TabTo Design System — tokens
+   외부 배포 문서(소개서 · 매뉴얼 · 기능설명서) 공통 토큰.
+   슬라이드 판형과 웹 판형이 같은 토큰을 공유합니다. */
 :root{
-  --bg:#ffffff;
-  --ink:#18181b;
-  --ink2:#52525b;
-  --mute:#9ca3af;
-  --line:#e5e7eb;
-  --line-soft:#f0f0f2;
-  --surface:#f4f4f5;
-  --th-bg:#f8f8f9;
-  --dark:#161616;
-  --accent:#f04e23;
-  --radius:12px;
+  /* Color — 중립 */
+  --tabto-ink:#0B0C0E;
+  --tabto-char:#2E3038;
+  --tabto-paper:#FFFFFF;
+  --tabto-surface:#F4F5F6;
+  --tabto-surface-2:#E7E8EA;
+  --tabto-line:#E3E5E8;
+  --tabto-line-strong:#C9CCD1;
+
+  /* Color — 텍스트 */
+  --tabto-text:#16181C;
+  --tabto-text-muted:#5E646B;
+  --tabto-text-faint:#9AA0A6;
+  --tabto-text-invert:#FFFFFF;
+  --tabto-text-on-dark:#8E949B;
+
+  /* Color — 강조. 페이지당 한 곳 */
+  --tabto-accent:#F0431C;
+  --tabto-accent-hover:#C4310F;
+
+  /* Type */
+  --tabto-font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+
+  /* Type scale — 웹 */
+  --tabto-web-h1:40px;
+  --tabto-web-h2:24px;
+  --tabto-web-h3:18px;
+  --tabto-web-lead:17px;
+  --tabto-web-body:15px;
+  --tabto-web-small:14px;
+  --tabto-web-cap:13px;
+  --tabto-web-label:11px;
+
+  /* Space — 4px 배수 */
+  --tabto-space-1:4px;
+  --tabto-space-2:8px;
+  --tabto-space-3:12px;
+  --tabto-space-4:16px;
+  --tabto-space-5:20px;
+  --tabto-space-6:24px;
+  --tabto-space-8:32px;
+  --tabto-space-10:40px;
+  --tabto-space-12:48px;
+  --tabto-space-16:64px;
+
+  /* Radius */
+  --tabto-radius-sm:6px;
+  --tabto-radius-md:10px;
+  --tabto-radius-lg:12px;
+  --tabto-radius-pill:999px;
+
+  /* Layout — 웹 문서 */
+  --tabto-header-h:64px;
+  --tabto-nav-w:280px;
+  --tabto-toc-w:240px;
+  --tabto-content-max:1020px;
 }
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
-  line-height:1.7;
-  font-size:16px;
+  background:var(--tabto-paper);
+  color:var(--tabto-text);
+  font-family:var(--tabto-font);
+  font-size:var(--tabto-web-body);
+  line-height:1.65;
   -webkit-font-smoothing:antialiased;
 }
-a{color:var(--ink);text-decoration:underline;text-decoration-color:#d4d4d8;text-underline-offset:3px}
-a:hover{text-decoration-color:var(--accent)}
+a{color:var(--tabto-text);text-decoration:underline;text-decoration-color:var(--tabto-line-strong);text-underline-offset:3px}
+a:hover{color:var(--tabto-accent);text-decoration-color:var(--tabto-accent)}
 
-/* ---------- layout ---------- */
-.layout{display:flex;min-height:100vh}
-.sidebar{
-  width:268px;flex:none;
-  border-right:1px solid var(--line);
-  padding:30px 18px 48px;
-  position:sticky;top:0;height:100vh;overflow-y:auto;
-  background:var(--bg);
+/* ---------- header ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--tabto-header-h);
+  background:var(--tabto-ink);color:var(--tabto-text-invert);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--tabto-space-6);
 }
-.content{flex:1;min-width:0;padding:56px 64px 96px}
-.page{max-width:760px;margin:0 auto}
+.topbar .t-left{display:flex;align-items:baseline;gap:var(--tabto-space-3)}
+.topbar .logo{font-size:var(--tabto-web-h3);font-weight:700;letter-spacing:-0.02em}
+.topbar .doc{font-size:var(--tabto-web-small);color:var(--tabto-text-on-dark)}
+.topbar .t-right{display:flex;align-items:center;gap:var(--tabto-space-4)}
+.topbar .ver{font-size:var(--tabto-web-cap);color:var(--tabto-text-on-dark)}
+.nav-btn{
+  display:none;cursor:pointer;
+  font-size:var(--tabto-web-cap);font-weight:700;color:var(--tabto-text-invert);
+  border:1px solid var(--tabto-char);border-radius:var(--tabto-radius-sm);
+  padding:var(--tabto-space-1) var(--tabto-space-3);
+}
+#nav-toggle{display:none}
 
-/* ---------- sidebar ---------- */
-.brand{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;padding:0 10px}
-.brand .logo{font-size:19px;font-weight:800;letter-spacing:-.02em}
-.brand .ver{font-size:11.5px;color:var(--mute);font-weight:600}
-.brand-sub{font-size:12.5px;color:var(--mute);margin-bottom:26px;padding:0 10px}
-.nav-group{margin-bottom:22px}
+/* ---------- shell ---------- */
+.shell{display:flex;padding-top:var(--tabto-header-h)}
+.sidebar{
+  width:var(--tabto-nav-w);flex:none;
+  position:sticky;top:var(--tabto-header-h);
+  height:calc(100vh - var(--tabto-header-h));overflow-y:auto;
+  border-right:1px solid var(--tabto-line);
+  background:var(--tabto-paper);
+  padding:var(--tabto-space-8) var(--tabto-space-5) var(--tabto-space-12);
+}
+.content{flex:1;min-width:0}
+.page{max-width:var(--tabto-content-max);margin:0 auto;padding:var(--tabto-space-12) var(--tabto-space-12) var(--tabto-space-16)}
+.toc{
+  width:var(--tabto-toc-w);flex:none;
+  position:sticky;top:var(--tabto-header-h);
+  height:calc(100vh - var(--tabto-header-h));overflow-y:auto;
+  padding:var(--tabto-space-8) var(--tabto-space-5);
+}
+.toc .toc-label{font-size:var(--tabto-web-label);font-weight:700;color:var(--tabto-text-faint);letter-spacing:.06em;margin-bottom:var(--tabto-space-3)}
+.toc ul{list-style:none;border-left:1px solid var(--tabto-line)}
+.toc a{
+  display:block;padding:var(--tabto-space-1) 0 var(--tabto-space-1) 14px;
+  font-size:var(--tabto-web-cap);color:var(--tabto-text-muted);text-decoration:none;
+}
+.toc a:hover{color:var(--tabto-accent)}
+.toc.empty{visibility:hidden}
+
+/* ---------- nav ---------- */
+.nav-group{margin-bottom:var(--tabto-space-6)}
 .nav-group>.gname{
-  font-size:11.5px;font-weight:700;color:var(--mute);
-  letter-spacing:.05em;
-  padding:0 10px;margin-bottom:5px;
+  font-size:var(--tabto-web-cap);font-weight:700;color:var(--tabto-text);
+  padding:0 var(--tabto-space-2);margin-bottom:var(--tabto-space-2);
+}
+.nav-group>.gname .gnum{
+  font-size:var(--tabto-web-label);font-weight:700;color:var(--tabto-accent);
+  margin-right:var(--tabto-space-2);letter-spacing:.04em;
 }
 .nav-group a{
-  display:block;padding:5px 10px;border-radius:7px;
-  font-size:13.5px;color:var(--ink2);text-decoration:none;
+  display:block;padding:var(--tabto-space-1) var(--tabto-space-2);
+  font-size:var(--tabto-web-small);color:var(--tabto-text-muted);text-decoration:none;
+  border-radius:var(--tabto-radius-sm);
 }
-.nav-group a:hover{background:var(--surface);color:var(--ink)}
-.nav-group a.active{background:var(--surface);color:var(--ink);font-weight:700}
-.nav-group a .no{display:inline-block;min-width:36px;color:var(--mute);font-size:12px;font-variant-numeric:tabular-nums;font-weight:400}
-.nav-group a.active .no{color:var(--accent);font-weight:700}
-
-/* mobile toggle */
-#nav-toggle{display:none}
-.nav-btn{display:none}
+.nav-group a:hover{color:var(--tabto-accent)}
+.nav-group a.active{color:var(--tabto-text);font-weight:600}
+.nav-group a .no{display:inline-block;min-width:38px;color:var(--tabto-text-faint);font-size:var(--tabto-web-cap);font-variant-numeric:tabular-nums}
+.nav-group a.active .no{color:var(--tabto-text)}
 
 /* ---------- hero ---------- */
-.hero{padding-bottom:44px;border-bottom:1px solid var(--line);margin-bottom:8px}
-.hero .badges{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.hero{padding-bottom:var(--tabto-space-12);border-bottom:1px solid var(--tabto-line)}
+.hero .badges{display:flex;gap:var(--tabto-space-2);margin-bottom:var(--tabto-space-5)}
 .badge{
-  font-size:12px;font-weight:600;padding:3px 11px;border-radius:999px;
-  background:var(--surface);color:var(--ink2);
+  font-size:var(--tabto-web-cap);font-weight:600;color:var(--tabto-text-muted);
+  background:var(--tabto-surface);border-radius:var(--tabto-radius-pill);
+  padding:var(--tabto-space-1) var(--tabto-space-3);
 }
-.hero h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:12px}
-.hero p{color:var(--ink2);max-width:600px}
+.hero h1{font-size:var(--tabto-web-h1);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:var(--tabto-space-3)}
+.hero p{font-size:var(--tabto-web-lead);line-height:1.7;color:var(--tabto-text-muted);max-width:640px}
 
 /* ---------- chapter / article ---------- */
-.chapter{margin:72px 0 0;display:flex;align-items:center;gap:12px}
-.chapter .num{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.06em}
-.chapter h2{font-size:15px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
-.chapter-line{height:1px;background:var(--line);flex:1}
+.chapter{margin-top:var(--tabto-space-16);display:flex;align-items:center;gap:var(--tabto-space-3)}
+.chapter .num{font-size:var(--tabto-web-label);font-weight:700;color:var(--tabto-accent);letter-spacing:.06em}
+.chapter h2{font-size:var(--tabto-web-cap);font-weight:700;letter-spacing:.01em}
+.chapter-line{height:1px;background:var(--tabto-line);flex:1}
 
-article{padding:52px 0;border-bottom:1px solid var(--line-soft);scroll-margin-top:24px}
+article{padding:var(--tabto-space-12) 0;border-bottom:1px solid var(--tabto-line);scroll-margin-top:calc(var(--tabto-header-h) + var(--tabto-space-6))}
 article:last-of-type{border-bottom:none}
-.crumb{font-size:13px;color:var(--mute);margin-bottom:14px}
-.crumb .sep{margin:0 6px;color:#d4d4d8}
-.crumb b{color:var(--ink);font-weight:700}
-article h3{font-size:31px;font-weight:800;letter-spacing:-.025em;line-height:1.25;margin-bottom:8px}
-.sub{font-size:15px;color:var(--mute);margin-bottom:22px}
-article h4{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:44px 0 14px}
-article p{margin:10px 0;color:#3f3f46}
-article p b,article li b{color:var(--ink)}
+.crumb{font-size:var(--tabto-web-cap);color:var(--tabto-text-faint);margin-bottom:var(--tabto-space-4)}
+.crumb .sep{margin:0 var(--tabto-space-2);color:var(--tabto-line-strong)}
+.crumb b{color:var(--tabto-text);font-weight:700}
+article h3{font-size:var(--tabto-web-h1);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:var(--tabto-space-2)}
+.sub{font-size:var(--tabto-web-lead);color:var(--tabto-text-faint);margin-bottom:var(--tabto-space-6)}
+article h4{font-size:var(--tabto-web-h2);font-weight:700;letter-spacing:-0.02em;margin:var(--tabto-space-12) 0 var(--tabto-space-4);scroll-margin-top:calc(var(--tabto-header-h) + var(--tabto-space-6))}
+article p{margin:var(--tabto-space-3) 0;font-size:var(--tabto-web-body);color:var(--tabto-text)}
+article p.lead{font-size:var(--tabto-web-lead);line-height:1.7}
+article b{font-weight:700}
+kbd{
+  font-family:var(--tabto-font);font-size:var(--tabto-web-cap);
+  background:var(--tabto-surface);border:1px solid var(--tabto-line);
+  border-radius:var(--tabto-radius-sm);padding:1px var(--tabto-space-2);white-space:nowrap;
+}
 
-/* ---------- tables ---------- */
-.tbl-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
-table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.6}
-th,td{padding:13px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft)}
-th{background:var(--th-bg);font-weight:700;font-size:13.5px;color:var(--ink);white-space:nowrap;border-bottom:1px solid var(--line)}
+/* ---------- table ---------- */
+.tbl-wrap{overflow-x:auto;margin:var(--tabto-space-4) 0;border:1px solid var(--tabto-line);border-radius:var(--tabto-radius-md);background:var(--tabto-paper)}
+table{border-collapse:collapse;width:100%;font-size:var(--tabto-web-small);line-height:1.6}
+th,td{padding:var(--tabto-space-3) var(--tabto-space-4);text-align:left;vertical-align:top;border-bottom:1px solid var(--tabto-line)}
+th{background:var(--tabto-surface);font-weight:700;font-size:var(--tabto-web-cap);color:var(--tabto-text);white-space:nowrap}
 tr:last-child td{border-bottom:none}
-td{color:var(--ink2)}
-td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+td{color:var(--tabto-text-muted)}
+td:first-child{font-weight:700;color:var(--tabto-text);white-space:nowrap;max-width:240px}
 td.wrap{white-space:normal}
-td:first-child.plain{font-weight:400;color:var(--ink2)}
-kbd{font-family:inherit;font-size:inherit;color:inherit;background:none;border:none;padding:0}
+td.plain{font-weight:400;color:var(--tabto-text-muted)}
 
 /* ---------- cards ---------- */
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
-.card b{display:block;font-size:15px;margin-bottom:5px;letter-spacing:-.01em}
-.card span{font-size:14px;color:var(--ink2)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--tabto-space-4);margin:var(--tabto-space-4) 0}
+.card{background:var(--tabto-paper);border:1px solid var(--tabto-line);border-radius:var(--tabto-radius-md);padding:var(--tabto-space-5)}
+.card b{display:block;font-size:16px;font-weight:700;letter-spacing:-0.01em;margin-bottom:var(--tabto-space-1)}
+.card span{font-size:var(--tabto-web-small);color:var(--tabto-text-muted)}
 
-/* ---------- definition rows ---------- */
-.defs{margin:16px 0}
-.defs .row{display:grid;grid-template-columns:216px 1fr;gap:28px;padding:17px 0;border-bottom:1px solid var(--line)}
-.defs .row:first-child{border-top:1px solid var(--line)}
-.defs .row dt,.defs .row .t{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
-.defs .row dd,.defs .row .d{font-size:15px;color:var(--ink2)}
+/* ---------- deflist ---------- */
+.defs{margin:var(--tabto-space-4) 0}
+.defs .row{display:grid;grid-template-columns:160px 1fr;gap:var(--tabto-space-6);padding:var(--tabto-space-4) 0;border-bottom:1px solid var(--tabto-line)}
+.defs .row:first-child{border-top:1px solid var(--tabto-line)}
+.defs .row .t{font-size:var(--tabto-web-body);font-weight:700;letter-spacing:-0.01em}
+.defs .row .d{font-size:var(--tabto-web-body);color:var(--tabto-text-muted)}
 
 /* ---------- steps ---------- */
-ol.steps{list-style:none;counter-reset:step;margin:18px 0}
-ol.steps li{counter-increment:step;position:relative;padding:0 0 26px 46px}
-ol.steps li:last-child{padding-bottom:4px}
+ol.steps{list-style:none;counter-reset:step;margin:var(--tabto-space-5) 0}
+ol.steps li{counter-increment:step;position:relative;padding:0 0 var(--tabto-space-6) 46px}
+ol.steps li:last-child{padding-bottom:var(--tabto-space-1)}
 ol.steps li::before{
   content:counter(step);position:absolute;left:0;top:0;
-  width:28px;height:28px;border-radius:50%;background:var(--dark);color:#fff;
-  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:var(--tabto-radius-pill);
+  background:var(--tabto-ink);color:var(--tabto-text-invert);
+  font-size:var(--tabto-web-cap);font-weight:700;
+  display:flex;align-items:center;justify-content:center;
 }
-ol.steps li::after{content:"";position:absolute;left:13.5px;top:34px;bottom:4px;width:1px;background:var(--line)}
+ol.steps li::after{content:"";position:absolute;left:13.5px;top:34px;bottom:var(--tabto-space-1);width:1px;background:var(--tabto-line)}
 ol.steps li:last-child::after{display:none}
-ol.steps li b{display:block;margin-bottom:2px;font-size:15.5px;padding-top:2px}
-ol.steps li span{color:var(--ink2);font-size:14.5px}
+ol.steps li b{display:block;font-size:16px;font-weight:700;padding-top:2px;margin-bottom:2px}
+ol.steps li span{font-size:var(--tabto-web-body);color:var(--tabto-text-muted)}
 
 /* ---------- callouts ---------- */
 .callout{
-  background:var(--surface);border-left:3px solid var(--accent);
-  border-radius:10px;padding:16px 22px;margin:22px 0;
-  font-size:15px;line-height:1.75;color:#3f3f46;
+  background:var(--tabto-surface);border-radius:var(--tabto-radius-md);
+  padding:var(--tabto-space-5) var(--tabto-space-6);margin:var(--tabto-space-6) 0;
+  font-size:var(--tabto-web-body);line-height:1.7;color:var(--tabto-text);
 }
-.callout .lb{font-weight:800;font-size:13px;letter-spacing:.02em;display:block;margin-bottom:4px;color:var(--accent)}
-.callout.dark{
-  background:var(--dark);border-left:none;border-radius:var(--radius);
-  color:#e4e4e7;padding:18px 26px;
+.callout .lb{
+  display:block;font-size:var(--tabto-web-label);font-weight:700;
+  letter-spacing:.06em;color:var(--tabto-accent);margin-bottom:var(--tabto-space-1);
 }
-.callout.dark .lb{color:#ff6a3d}
+.callout.dark{background:var(--tabto-ink);color:var(--tabto-text-invert)}
 .callout a{color:inherit}
-.capture{
-  border:1.5px dashed #d4d4d8;border-radius:var(--radius);
-  padding:28px 16px;margin:20px 0;text-align:center;color:var(--mute);
-  font-size:13.5px;background:#fafafa;
+
+/* ---------- capture ---------- */
+figure.capture{margin:var(--tabto-space-5) 0}
+figure.capture .shot{
+  aspect-ratio:16/9;background:var(--tabto-char);
+  border:1px solid var(--tabto-line);border-radius:var(--tabto-radius-md);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--tabto-text-on-dark);font-size:var(--tabto-web-cap);
 }
-.capture::before{content:"🖼";display:block;font-size:20px;margin-bottom:6px;opacity:.75}
+figure.capture figcaption{font-size:var(--tabto-web-cap);color:var(--tabto-text-faint);margin-top:var(--tabto-space-2)}
 
 /* ---------- faq ---------- */
-.faq{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:14px 0}
-.faq .q{font-weight:800;font-size:16px;letter-spacing:-.01em;margin-bottom:8px}
-.faq .a{font-size:14.5px;color:var(--ink2)}
+.faq{padding:var(--tabto-space-5) 0;border-bottom:1px solid var(--tabto-line)}
+.faq:first-of-type{border-top:1px solid var(--tabto-line);margin-top:var(--tabto-space-5)}
+.faq .q{font-size:16px;font-weight:700;letter-spacing:-0.01em;margin-bottom:var(--tabto-space-2)}
+.faq .a{font-size:var(--tabto-web-body);color:var(--tabto-text-muted)}
 
 /* ---------- footer ---------- */
 footer{
-  margin-top:88px;padding-top:26px;border-top:1px solid var(--line);
-  color:var(--mute);font-size:13px;
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  margin-top:var(--tabto-space-16);padding-top:var(--tabto-space-6);
+  border-top:1px solid var(--tabto-line);
+  font-size:var(--tabto-web-cap);color:var(--tabto-text-faint);
+  display:flex;justify-content:space-between;gap:var(--tabto-space-4);flex-wrap:wrap;
 }
 
 /* ---------- responsive ---------- */
-@media (max-width:960px){
-  .layout{display:block}
+@media (max-width:940px){
+  .nav-btn{display:inline-block}
+  .toc{display:none}
   .sidebar{
-    position:fixed;left:0;top:0;bottom:0;z-index:50;height:100vh;
+    position:fixed;left:0;right:0;top:var(--tabto-header-h);bottom:0;z-index:90;
+    width:100%;border-right:none;
     transform:translateX(-100%);transition:transform .2s ease;
-    box-shadow:4px 0 24px rgba(0,0,0,.08);
   }
-  #nav-toggle:checked ~ .layout .sidebar{transform:translateX(0)}
-  .nav-btn{
-    display:flex;align-items:center;gap:8px;
-    position:fixed;top:14px;left:14px;z-index:60;cursor:pointer;
-    background:#fff;border:1px solid var(--line);border-radius:10px;
-    padding:8px 13px;font-size:13.5px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.06);
-  }
-  .content{padding:80px 22px 72px}
-  .hero h1{font-size:29px}
-  article h3{font-size:25px}
+  #nav-toggle:checked ~ .shell .sidebar{transform:translateX(0)}
+  .page{padding:var(--tabto-space-8) var(--tabto-space-5) var(--tabto-space-16)}
+  .hero h1{font-size:32px}
+  article h3{font-size:30px}
+  article h4{font-size:20px}
   .cards{grid-template-columns:1fr}
-  .defs .row{grid-template-columns:1fr;gap:4px;padding:14px 0}
+  .defs .row{grid-template-columns:1fr;gap:var(--tabto-space-1);padding:var(--tabto-space-3) 0}
   td:first-child{white-space:normal}
 }
 </style>
 </head>
 <body>
 <input type="checkbox" id="nav-toggle">
-<label class="nav-btn" for="nav-toggle">☰ 목차</label>
+<header class="topbar">
+  <div class="t-left"><span class="logo">TabTo</span><span class="doc">서비스 매뉴얼</span></div>
+  <div class="t-right">
+    <span class="ver">v.0.1 · 26-08-14 · Living Document</span>
+    <label class="nav-btn" for="nav-toggle">목차</label>
+  </div>
+</header>
 
-<div class="layout">
+<div class="shell">
 <nav class="sidebar">
-  <div class="brand"><span class="logo">TabTo</span><span class="ver">매뉴얼 v0.1</span></div>
-  <div class="brand-sub">서비스 매뉴얼 · 26-08-14</div>
-
   <div class="nav-group">
-    <div class="gname">01 시작하기</div>
+    <div class="gname"><span class="gnum">01</span>시작하기</div>
     <a href="#s0101"><span class="no">1.1</span>TabTo란?</a>
     <a href="#s0102"><span class="no">1.2</span>회원가입</a>
     <a href="#s0103"><span class="no">1.3</span>승인 방법</a>
     <a href="#s0104"><span class="no">1.4</span>첫 화면까지</a>
   </div>
   <div class="nav-group">
-    <div class="gname">02 워크플로우</div>
+    <div class="gname"><span class="gnum">02</span>워크플로우</div>
     <a href="#s0201"><span class="no">2.1</span>에디터 구성</a>
     <a href="#s0202"><span class="no">2.2</span>노드 기반 작업 개념</a>
     <a href="#s0203"><span class="no">2.2.1</span>단축키</a>
@@ -214,20 +308,20 @@ footer{
     <a href="#s0205"><span class="no">2.4</span>활용 가능 모델</a>
   </div>
   <div class="nav-group">
-    <div class="gname">03 작업공간</div>
+    <div class="gname"><span class="gnum">03</span>작업공간</div>
     <a href="#s0301"><span class="no">3.1</span>내 파일 · My Files</a>
     <a href="#s0302"><span class="no">3.2</span>프로젝트 · Projects</a>
     <a href="#s0303"><span class="no">3.3</span>즐겨찾기 · Favorites</a>
     <a href="#s0304"><span class="no">3.4</span>에셋 · Assets</a>
   </div>
   <div class="nav-group">
-    <div class="gname">04 대시보드</div>
+    <div class="gname"><span class="gnum">04</span>대시보드</div>
     <a href="#s0401"><span class="no">4.0</span>사용자 권한</a>
     <a href="#s0402"><span class="no">4.1</span>일반 사용자용 메뉴</a>
     <a href="#s0403"><span class="no">4.2</span>조직 관리자용 메뉴</a>
   </div>
   <div class="nav-group">
-    <div class="gname">05 에이전트 Wilson</div>
+    <div class="gname"><span class="gnum">05</span>에이전트 Wilson</div>
     <a href="#s0501"><span class="no">5.0</span>Wilson이란?</a>
     <a href="#s0502"><span class="no">5.1</span>Assistant</a>
     <a href="#s0503"><span class="no">5.2</span>Workspace</a>
@@ -235,7 +329,7 @@ footer{
     <a href="#s0505"><span class="no">5.4</span>Analytics</a>
   </div>
   <div class="nav-group">
-    <div class="gname">06 부록</div>
+    <div class="gname"><span class="gnum">06</span>부록</div>
     <a href="#s0601"><span class="no">6.1</span>문제 해결</a>
     <a href="#s0602"><span class="no">6.2</span>단축키 전체 표</a>
     <a href="#s0603"><span class="no">6.3</span>노드 전체 카탈로그</a>
@@ -265,7 +359,7 @@ footer{
   <div class="crumb">01 시작하기<span class="sep">/</span><b>TabTo란?</b></div>
   <h3>TabTo란?</h3>
   <div class="sub">1.1 · 비주얼 AI 워크스페이스</div>
-  <p>TabTo는 비주얼 AI 워크스페이스입니다. 노드를 연결해 이미지·영상·음악·3D 결과물을 생성하는 작업 환경을 제공합니다. 입력, 생성, 가공, 출력을 담당하는 노드를 캔버스에 배치하고 서로 연결하면, 연결된 순서에 따라 순차적으로 작업이 실행됩니다.</p>
+  <p class="lead">TabTo는 비주얼 AI 워크스페이스입니다. 노드를 연결해 이미지·영상·음악·3D 결과물을 생성하는 작업 환경을 제공합니다. 입력, 생성, 가공, 출력을 담당하는 노드를 캔버스에 배치하고 서로 연결하면, 연결된 순서에 따라 순차적으로 작업이 실행됩니다.</p>
 
   <h4>주요 특징</h4>
   <div class="cards">
@@ -291,7 +385,7 @@ footer{
   <div class="crumb">01 시작하기<span class="sep">/</span><b>회원가입</b></div>
   <h3>회원가입</h3>
   <div class="sub">1.2 · Sign Up</div>
-  <p>이메일로 가입하고 인증 링크를 눌러 로그인합니다.</p>
+  <p class="lead">이메일로 가입하고 인증 링크를 눌러 로그인합니다.</p>
 
   <div class="callout dark"><span class="lb">가입 전 확인 사항</span>회사·팀 단위로 사용하는 경우 회사 도메인 이메일로 가입하는 것을 권장합니다. 조직에 합류하려면 조직 관리자(Admin)가 발급한 참여 코드가 필요합니다. 가입 전에 관리자에게 참여 코드를 요청하세요.</div>
 
@@ -319,8 +413,8 @@ footer{
   <div class="crumb">01 시작하기<span class="sep">/</span><b>승인 방법</b></div>
   <h3>승인 방법</h3>
   <div class="sub">1.3 · Approval</div>
-  <p>회원가입 절차를 완료하면 참여 코드 입력 화면이 표시됩니다. 이후 절차는 조직 내 역할에 따라 다릅니다.</p>
-  <div class="capture">캡처 예정: 참여 코드 입력 화면 (Enter join code)</div>
+  <p class="lead">회원가입 절차를 완료하면 참여 코드 입력 화면이 표시됩니다. 이후 절차는 조직 내 역할에 따라 다릅니다.</p>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>참여 코드 입력 화면 (Enter join code)</figcaption></figure>
 
   <h4>조직 관리자 (Admin)</h4>
   <ol class="steps">
@@ -344,7 +438,7 @@ footer{
   <div class="crumb">01 시작하기<span class="sep">/</span><b>첫 화면까지</b></div>
   <h3>첫 화면까지</h3>
   <div class="sub">1.4 · Getting Started</div>
-  <p>작업 화면을 여는 순서는 다음과 같습니다.</p>
+  <p class="lead">작업 화면을 여는 순서는 다음과 같습니다.</p>
   <h4>다섯 단계</h4>
   <ol class="steps">
     <li><b>로그인합니다</b><span>로그인을 완료하면 랜딩페이지가 아닌 워크스페이스의 내 파일(My Files) 화면으로 이동합니다.</span></li>
@@ -362,8 +456,8 @@ footer{
   <div class="crumb">02 워크플로우<span class="sep">/</span><b>워크플로우 에디터 구성</b></div>
   <h3>워크플로우 에디터 구성</h3>
   <div class="sub">2.1 · Editor</div>
-  <p>새 워크플로우를 열면 화면이 다음과 같이 구성됩니다.</p>
-  <div class="capture">캡처 예정: 에디터 전체 화면 (번호 오버레이)</div>
+  <p class="lead">새 워크플로우를 열면 화면이 다음과 같이 구성됩니다.</p>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>에디터 전체 화면 (번호 오버레이)</figcaption></figure>
   <div class="tbl-wrap"><table>
     <tr><th>번호</th><th>위치</th><th>기능</th></tr>
     <tr><td class="plain">1</td><td class="wrap">가운데 영역</td><td class="wrap"><b>캔버스</b> — 노드를 배치하고 연결하는 작업 영역</td></tr>
@@ -374,14 +468,14 @@ footer{
     <tr><td class="plain">6</td><td class="wrap">좌측 하단 툴바</td><td class="wrap"><b>캔버스 제어</b> — 확대/축소, 화면 맞춤 등 캔버스 조작 버튼 모음</td></tr>
     <tr><td class="plain">7</td><td class="wrap">우측 하단</td><td class="wrap"><b>미니맵</b> — 캔버스 전체 구성을 축소해 표시하며, 현재 보고 있는 영역을 확인합니다</td></tr>
   </table></div>
-  <div class="callout"><span class="lb">참고</span>작업은 자동 저장됩니다. 기본 1분 간격이며, 화면을 벗어날 때 추가로 저장됩니다. 저장 버튼을 우클릭하면 자동 저장 간격을 변경할 수 있습니다. 중요한 시점에는 Ctrl + S로 직접 저장하는 것을 권장합니다.</div>
+  <div class="callout"><span class="lb">참고</span>작업은 자동 저장됩니다. 기본 1분 간격이며, 화면을 벗어날 때 추가로 저장됩니다. 저장 버튼을 우클릭하면 자동 저장 간격을 변경할 수 있습니다. 중요한 시점에는 <kbd>Ctrl + S</kbd>로 직접 저장하는 것을 권장합니다.</div>
 </article>
 
 <article id="s0202">
   <div class="crumb">02 워크플로우<span class="sep">/</span><b>노드 기반 작업 개념</b></div>
   <h3>노드 기반 작업 개념</h3>
   <div class="sub">2.2 · Node Concept</div>
-  <p>노드를 배치하고 연결하면 연결된 순서대로 작업이 실행됩니다.</p>
+  <p class="lead">노드를 배치하고 연결하면 연결된 순서대로 작업이 실행됩니다.</p>
 
   <h4>노드의 4가지 역할</h4>
   <div class="tbl-wrap"><table>
@@ -391,7 +485,7 @@ footer{
     <tr><td>Utility</td><td class="wrap">결과물을 보정·가공합니다</td><td class="wrap">색 보정, 자르기, 배경 제거, 합성</td></tr>
     <tr><td>Output</td><td class="wrap">결과물을 확인·저장합니다</td><td class="wrap">이미지 출력, 영상 출력</td></tr>
   </table></div>
-  <div class="capture">캡처 예정: 노드 4역할 연결 예시</div>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>노드 4역할 연결 예시</figcaption></figure>
 
   <h4>노드 연결 방법</h4>
   <div class="defs">
@@ -407,20 +501,20 @@ footer{
   <div class="crumb">02 워크플로우<span class="sep">/</span><b>단축키</b></div>
   <h3>단축키</h3>
   <div class="sub">2.2.1 · Shortcuts</div>
-  <p>캔버스에서 자주 사용하는 단축키입니다.</p>
+  <p class="lead">캔버스에서 자주 사용하는 단축키입니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>동작</th><th>Windows</th><th>Mac</th></tr>
-    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td class="wrap">Tab 또는 우클릭</td><td>동일</td></tr>
-    <tr><td class="wrap">삭제</td><td class="wrap">Delete / Backspace / X</td><td>동일</td></tr>
-    <tr><td class="wrap">복사 / 붙여넣기</td><td class="wrap">Ctrl+C / Ctrl+V</td><td>⌘C / ⌘V</td></tr>
-    <tr><td class="wrap">복제</td><td class="wrap">Shift + D</td><td>동일</td></tr>
-    <tr><td class="wrap">되돌리기</td><td class="wrap">Ctrl + Z</td><td>⌘Z</td></tr>
-    <tr><td class="wrap">다시 실행</td><td class="wrap">Ctrl+Shift+Z 또는 Ctrl+Y</td><td>⌘⇧Z</td></tr>
-    <tr><td class="wrap">저장</td><td class="wrap">Ctrl + S</td><td>⌘S</td></tr>
-    <tr><td class="wrap">그룹 묶기 / 해제</td><td class="wrap">Ctrl+G / Ctrl+Shift+G</td><td>⌘G / ⌘⇧G</td></tr>
-    <tr><td class="wrap">선택 노드 자동 정렬</td><td class="wrap">Shift + A</td><td>동일</td></tr>
-    <tr><td class="wrap">선택 노드로 화면 맞춤</td><td class="wrap">F</td><td>동일</td></tr>
-    <tr><td class="wrap">다중 선택</td><td class="wrap">Shift + 클릭 또는 빈 영역 좌클릭 드래그(박스 선택)</td><td>동일</td></tr>
+    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td class="wrap"><kbd>Tab</kbd> 또는 우클릭</td><td>동일</td></tr>
+    <tr><td class="wrap">삭제</td><td class="wrap"><kbd>Delete</kbd> / <kbd>Backspace</kbd> / <kbd>X</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">복사 / 붙여넣기</td><td class="wrap"><kbd>Ctrl+C</kbd> / <kbd>Ctrl+V</kbd></td><td class="wrap"><kbd>⌘C</kbd> / <kbd>⌘V</kbd></td></tr>
+    <tr><td class="wrap">복제</td><td class="wrap"><kbd>Shift + D</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">되돌리기</td><td class="wrap"><kbd>Ctrl + Z</kbd></td><td class="wrap"><kbd>⌘Z</kbd></td></tr>
+    <tr><td class="wrap">다시 실행</td><td class="wrap"><kbd>Ctrl+Shift+Z</kbd> 또는 <kbd>Ctrl+Y</kbd></td><td class="wrap"><kbd>⌘⇧Z</kbd></td></tr>
+    <tr><td class="wrap">저장</td><td class="wrap"><kbd>Ctrl + S</kbd></td><td class="wrap"><kbd>⌘S</kbd></td></tr>
+    <tr><td class="wrap">그룹 묶기 / 해제</td><td class="wrap"><kbd>Ctrl+G</kbd> / <kbd>Ctrl+Shift+G</kbd></td><td class="wrap"><kbd>⌘G</kbd> / <kbd>⌘⇧G</kbd></td></tr>
+    <tr><td class="wrap">선택 노드 자동 정렬</td><td class="wrap"><kbd>Shift + A</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">선택 노드로 화면 맞춤</td><td class="wrap"><kbd>F</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">다중 선택</td><td class="wrap"><kbd>Shift</kbd> + 클릭 또는 빈 영역 좌클릭 드래그(박스 선택)</td><td>동일</td></tr>
     <tr><td class="wrap">화면 이동</td><td class="wrap">휠클릭 또는 우클릭 드래그</td><td>동일</td></tr>
     <tr><td class="wrap">확대 / 축소</td><td class="wrap">휠 스크롤 / 트랙패드 핀치</td><td>동일</td></tr>
   </table></div>
@@ -431,8 +525,8 @@ footer{
   <div class="crumb">02 워크플로우<span class="sep">/</span><b>활용 가능 노드</b></div>
   <h3>활용 가능 노드</h3>
   <div class="sub">2.3 · 75종</div>
-  <p>노드는 4개 대분류 아래 75종으로 구성됩니다. 이 절에서는 분류별 구성을 확인하고, 전체 목록은 <a href="#s0603">부록 6.3</a>을 참조하세요.</p>
-  <div class="capture">캡처 예정: 노드 추가 메뉴 펼친 화면</div>
+  <p class="lead">노드는 4개 대분류 아래 75종으로 구성됩니다. 이 절에서는 분류별 구성을 확인하고, 전체 목록은 <a href="#s0603">부록 6.3</a>을 참조하세요.</p>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>노드 추가 메뉴 펼친 화면</figcaption></figure>
 
   <h4>Input (11종)</h4>
   <div class="tbl-wrap"><table>
@@ -485,8 +579,8 @@ footer{
 <article id="s0205">
   <div class="crumb">02 워크플로우<span class="sep">/</span><b>활용 가능 모델</b></div>
   <h3>활용 가능 모델</h3>
-  <div class="sub">2.4 · 207종</div>
-  <p>Generation 노드를 추가한 후 노드 내부에서 모델을 선택합니다. 동일한 텍스트→이미지 작업이라도 모델에 따라 결과물의 스타일, 처리 속도, 비용이 다릅니다.</p>
+  <div class="sub">2.4 · 현재 207종 · 수시 변경</div>
+  <p class="lead">Generation 노드를 추가한 후 노드 내부에서 모델을 선택합니다. 동일한 텍스트→이미지 작업이라도 모델에 따라 결과물의 스타일, 처리 속도, 비용이 다릅니다.</p>
   <div class="callout"><span class="lb">참고</span>모델은 현재 207종이며 수시로 추가·변경됩니다. 전체 목록은 <a href="#s0604">부록 6.4</a>에 있으며, 최신 기준은 관리자의 "모델 노출 설정"을 따릅니다. 관리자 설정에 따라 화면에 표시되는 모델이 다를 수 있습니다.</div>
 
   <h4>모드 7종과 대표 모델</h4>
@@ -500,7 +594,7 @@ footer{
     <tr><td>T2A</td><td class="wrap">텍스트 → 음악·효과음</td><td class="wrap">Stable Audio, Lyria 2, Beatoven, Sonauto(보컬)</td></tr>
     <tr><td>I2M</td><td class="wrap">이미지 → 3D 모델</td><td class="wrap">Tripo3D, Hunyuan 3D, Meshy</td></tr>
   </table></div>
-  <div class="capture">캡처 예정: 모델 선택 드롭다운</div>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>모델 선택 드롭다운</figcaption></figure>
 </article>
 
 <!-- ===================== 03 작업공간 ===================== -->
@@ -510,8 +604,8 @@ footer{
   <div class="crumb">03 작업공간<span class="sep">/</span><b>내 파일 · My Files</b></div>
   <h3>내 파일 · My Files</h3>
   <div class="sub">3.1</div>
-  <p>로그인 후 처음 도착하는 화면이 작업공간입니다. 왼쪽 메뉴는 위에서부터 프로젝트 / 내 파일 / 즐겨찾기 / 에셋 순으로 구성되며, 하단 커뮤니티 구역에 디스코드 링크가 있습니다. 내 파일에는 개인 워크플로우가 모두 표시되고, 최근에 수정한 항목이 상단에 정렬됩니다.</p>
-  <div class="capture">캡처 예정: My Files 전체 화면</div>
+  <p class="lead">로그인 후 처음 도착하는 화면이 작업공간입니다. 왼쪽 메뉴는 위에서부터 프로젝트 / 내 파일 / 즐겨찾기 / 에셋 순으로 구성되며, 하단 커뮤니티 구역에 디스코드 링크가 있습니다. 내 파일에는 개인 워크플로우가 모두 표시되고, 최근에 수정한 항목이 상단에 정렬됩니다.</p>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>My Files 전체 화면</figcaption></figure>
 
   <h4>주요 기능</h4>
   <div class="tbl-wrap"><table>
@@ -531,7 +625,7 @@ footer{
   <div class="crumb">03 작업공간<span class="sep">/</span><b>프로젝트 · Projects</b></div>
   <h3>프로젝트 · Projects</h3>
   <div class="sub">3.2</div>
-  <p>프로젝트는 팀 단위로 워크플로우를 관리하는 공간입니다.</p>
+  <p class="lead">프로젝트는 팀 단위로 워크플로우를 관리하는 공간입니다.</p>
 
   <h4>내 파일과의 차이</h4>
   <div class="tbl-wrap"><table>
@@ -556,7 +650,7 @@ footer{
   <div class="crumb">03 작업공간<span class="sep">/</span><b>즐겨찾기 · Favorites</b></div>
   <h3>즐겨찾기 · Favorites</h3>
   <div class="sub">3.3</div>
-  <p>내 파일에서 별표 아이콘을 누른 워크플로우가 자동으로 수집되는 화면입니다.</p>
+  <p class="lead">내 파일에서 별표 아이콘을 누른 워크플로우가 자동으로 수집되는 화면입니다.</p>
   <div class="defs">
     <div class="row"><div class="t">폴더 분류</div><div class="d">"새 폴더"로 폴더를 생성해 분류할 수 있으며, 폴더의 이름 변경과 삭제도 지원합니다.</div></div>
     <div class="row"><div class="t">미분류 항목</div><div class="d">폴더에 배정하지 않은 항목은 "최근 즐겨찾기" 구역에 표시되며, 항목에 "미분류" 라벨이 표시됩니다.</div></div>
@@ -567,8 +661,8 @@ footer{
   <div class="crumb">03 작업공간<span class="sep">/</span><b>에셋 · Assets</b></div>
   <h3>에셋 · Assets</h3>
   <div class="sub">3.4</div>
-  <p>생성한 결과물(이미지·영상·오디오·3D·텍스트)이 보관되는 화면입니다.</p>
-  <div class="capture">캡처 예정: Assets 그리드 뷰</div>
+  <p class="lead">생성한 결과물(이미지·영상·오디오·3D·텍스트)이 보관되는 화면입니다.</p>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>Assets 그리드 뷰</figcaption></figure>
 
   <h4>화면 구성</h4>
   <div class="defs">
@@ -592,7 +686,7 @@ footer{
   <div class="crumb">04 대시보드<span class="sep">/</span><b>사용자 권한</b></div>
   <h3>사용자 권한</h3>
   <div class="sub">4.0 · Roles</div>
-  <p>계정·조직·사용량을 관리하는 화면입니다. 화면 위쪽 계정 메뉴에서 Dashboard로 이동합니다.</p>
+  <p class="lead">계정·조직·사용량을 관리하는 화면입니다. 화면 위쪽 계정 메뉴에서 Dashboard로 이동합니다.</p>
   <div class="callout dark"><span class="lb">주의</span>대시보드는 권한에 따라 표시되는 메뉴가 다릅니다. 화면에 일부 탭이 표시되지 않아도 정상이며, 이 장은 모든 메뉴가 표시되는 기준으로 설명합니다.</div>
 
   <h4>역할 2단계</h4>
@@ -607,7 +701,7 @@ footer{
   <div class="crumb">04 대시보드<span class="sep">/</span><b>일반 사용자용 메뉴</b></div>
   <h3>일반 사용자용 메뉴</h3>
   <div class="sub">4.1 · Member</div>
-  <p>일반 사용자 권한으로 사용하는 메뉴입니다.</p>
+  <p class="lead">일반 사용자 권한으로 사용하는 메뉴입니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>메뉴</th><th>기능</th></tr>
     <tr><td>Profile</td><td class="wrap">가입 정보를 확인하고 비밀번호를 변경합니다</td></tr>
@@ -622,7 +716,7 @@ footer{
   <div class="crumb">04 대시보드<span class="sep">/</span><b>조직 관리자용 메뉴</b></div>
   <h3>조직 관리자용 메뉴</h3>
   <div class="sub">4.2 · Admin</div>
-  <p>조직을 운영하는 관리자가 사용하는 메뉴입니다.</p>
+  <p class="lead">조직을 운영하는 관리자가 사용하는 메뉴입니다.</p>
 
   <h4>메뉴</h4>
   <div class="tbl-wrap"><table>
@@ -652,7 +746,7 @@ footer{
   <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Wilson이란?</b></div>
   <h3>Wilson이란?</h3>
   <div class="sub">5.0 · AI Agent</div>
-  <p>Wilson은 TabTo의 각 화면에 배치된 AI 에이전트입니다. 화면마다 하나씩 제공되며, 해당 화면의 업무 범위에 맞는 기능을 수행합니다. 동일한 에이전트이지만 위치에 따라 담당 역할이 다릅니다.</p>
+  <p class="lead">Wilson은 TabTo의 각 화면에 배치된 AI 에이전트입니다. 화면마다 하나씩 제공되며, 해당 화면의 업무 범위에 맞는 기능을 수행합니다. 동일한 에이전트이지만 위치에 따라 담당 역할이 다릅니다.</p>
 
   <h4>역할 4종</h4>
   <div class="tbl-wrap"><table>
@@ -660,7 +754,7 @@ footer{
     <tr><td class="wrap">워크플로우 에디터</td><td class="wrap plain">AI 버튼</td><td class="wrap"><b>Assistant</b></td><td class="wrap">대화로 워크플로우를 설계하고, 사용자가 승인하면 캔버스에 적용합니다</td></tr>
     <tr><td class="wrap">작업공간·즐겨찾기</td><td class="wrap plain">폴더 아이콘 버튼</td><td class="wrap"><b>Workspace</b></td><td class="wrap">작업 파일을 검색·요약하고 열어 줍니다</td></tr>
     <tr><td class="wrap">에셋</td><td class="wrap plain">이미지 아이콘 버튼</td><td class="wrap"><b>Asset Librarian</b></td><td class="wrap">결과물을 검색합니다</td></tr>
-    <tr><td class="wrap">대시보드 (슈퍼 관리자 전용)</td><td class="wrap plain">차트 아이콘 버튼</td><td class="wrap"><b>Analytics</b></td><td class="wrap">사용량과 비용을 분석합니다</td></tr>
+    <tr><td class="wrap">대시보드</td><td class="wrap plain">차트 아이콘 버튼</td><td class="wrap"><b>Analytics</b></td><td class="wrap">사용량과 비용을 분석합니다 (관리 권한 전용)</td></tr>
   </table></div>
   <div class="callout"><span class="lb">참고</span>버튼에 마우스를 올리면 "Wilson · …" 형식으로 역할 이름이 표시됩니다. 조직에 AI 키가 설정되지 않은 경우 버튼이 표시되지 않을 수 있습니다.</div>
 
@@ -682,7 +776,7 @@ footer{
   <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Assistant</b></div>
   <h3>Assistant</h3>
   <div class="sub">5.1 · 워크플로우 에디터</div>
-  <p>에디터에서 다음과 같은 요청을 처리합니다.</p>
+  <p class="lead">에디터에서 다음과 같은 요청을 처리합니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
     <tr><td class="wrap">"인물 사진을 영상으로 만들고 싶어"</td><td class="wrap">필요한 노드와 연결 구성을 담은 설계안을 제시합니다</td></tr>
@@ -690,14 +784,14 @@ footer{
     <tr><td class="wrap">"이 노드 지워줘 / 복제해줘"</td><td class="wrap">노드 삭제·수정·복제를 실행합니다</td></tr>
   </table></div>
   <div class="callout"><span class="lb">동작 방식</span>Wilson이 제시한 설계안에는 "캔버스에 적용하기" 버튼이 함께 표시됩니다. 이 버튼을 눌러야 실제로 노드가 추가·연결·수정되며, 사용자 확인 없이 자동으로 반영되지 않습니다.</div>
-  <div class="capture">캡처 예정: Assistant 대화 예시</div>
+  <figure class="capture"><div class="shot">캡처 예정</div><figcaption>Assistant 대화 예시</figcaption></figure>
 </article>
 
 <article id="s0503">
   <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Workspace</b></div>
   <h3>Workspace</h3>
   <div class="sub">5.2 · 작업공간·즐겨찾기</div>
-  <p>작업 파일을 검색·요약하고 열어 줍니다.</p>
+  <p class="lead">작업 파일을 검색·요약하고 열어 줍니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
     <tr><td class="wrap">"지난주에 하던 바닷가 영상 작업 찾아줘"</td><td class="wrap">검색 후 해당 워크플로우를 열어 줍니다</td></tr>
@@ -711,7 +805,7 @@ footer{
   <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Asset Librarian</b></div>
   <h3>Asset Librarian</h3>
   <div class="sub">5.3 · 에셋</div>
-  <p>결과물을 검색합니다.</p>
+  <p class="lead">결과물을 검색합니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
     <tr><td class="wrap">"고양이 나온 이미지만 모아줘"</td><td class="wrap">프롬프트 검색과 이미지 내용 검색(비전)을 함께 수행합니다</td></tr>
@@ -728,8 +822,8 @@ footer{
 <article id="s0505">
   <div class="crumb">05 에이전트 Wilson<span class="sep">/</span><b>Analytics</b></div>
   <h3>Analytics</h3>
-  <div class="sub">5.4 · 대시보드 (슈퍼 관리자 전용)</div>
-  <p>사용량과 비용을 분석합니다. 읽기 전용이므로 설정을 변경하지 않습니다.</p>
+  <div class="sub">5.4 · 대시보드</div>
+  <p class="lead">사용량과 비용을 분석합니다. 읽기 전용이므로 설정을 변경하지 않습니다.</p>
   <div class="tbl-wrap"><table>
     <tr><th>요청 예시</th><th>동작</th></tr>
     <tr><td class="wrap">"이번 달 크레딧 어디에 많이 썼어?"</td><td class="wrap">사용량과 비용을 분석합니다</td></tr>
@@ -778,18 +872,18 @@ footer{
   <div class="sub">6.2 · Shortcuts</div>
   <div class="tbl-wrap"><table>
     <tr><th>동작</th><th>Windows</th><th>Mac</th></tr>
-    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td class="wrap">Tab / 우클릭</td><td>동일</td></tr>
-    <tr><td class="wrap">삭제</td><td class="wrap">Delete / Backspace / X</td><td>동일</td></tr>
-    <tr><td class="wrap">복사 / 붙여넣기</td><td class="wrap">Ctrl+C / Ctrl+V</td><td>⌘C / ⌘V</td></tr>
-    <tr><td class="wrap">복제</td><td class="wrap">Shift+D</td><td>동일</td></tr>
-    <tr><td class="wrap">되돌리기 / 다시 실행</td><td class="wrap">Ctrl+Z / Ctrl+Shift+Z·Ctrl+Y</td><td>⌘Z / ⌘⇧Z</td></tr>
-    <tr><td class="wrap">저장</td><td class="wrap">Ctrl+S</td><td>⌘S</td></tr>
-    <tr><td class="wrap">그룹 / 해제</td><td class="wrap">Ctrl+G / Ctrl+Shift+G</td><td>⌘G / ⌘⇧G</td></tr>
-    <tr><td class="wrap">자동 정렬</td><td class="wrap">Shift+A</td><td>동일</td></tr>
-    <tr><td class="wrap">화면 맞춤</td><td class="wrap">F</td><td>동일</td></tr>
-    <tr><td class="wrap">다중 선택</td><td class="wrap">Shift+클릭 / 빈 영역 좌클릭 드래그(박스)</td><td>동일</td></tr>
+    <tr><td class="wrap">노드 추가 메뉴 (검색 포함)</td><td class="wrap"><kbd>Tab</kbd> / 우클릭</td><td>동일</td></tr>
+    <tr><td class="wrap">삭제</td><td class="wrap"><kbd>Delete</kbd> / <kbd>Backspace</kbd> / <kbd>X</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">복사 / 붙여넣기</td><td class="wrap"><kbd>Ctrl+C</kbd> / <kbd>Ctrl+V</kbd></td><td class="wrap"><kbd>⌘C</kbd> / <kbd>⌘V</kbd></td></tr>
+    <tr><td class="wrap">복제</td><td class="wrap"><kbd>Shift+D</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">되돌리기 / 다시 실행</td><td class="wrap"><kbd>Ctrl+Z</kbd> / <kbd>Ctrl+Shift+Z</kbd>·<kbd>Ctrl+Y</kbd></td><td class="wrap"><kbd>⌘Z</kbd> / <kbd>⌘⇧Z</kbd></td></tr>
+    <tr><td class="wrap">저장</td><td class="wrap"><kbd>Ctrl+S</kbd></td><td class="wrap"><kbd>⌘S</kbd></td></tr>
+    <tr><td class="wrap">그룹 / 해제</td><td class="wrap"><kbd>Ctrl+G</kbd> / <kbd>Ctrl+Shift+G</kbd></td><td class="wrap"><kbd>⌘G</kbd> / <kbd>⌘⇧G</kbd></td></tr>
+    <tr><td class="wrap">자동 정렬</td><td class="wrap"><kbd>Shift+A</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">화면 맞춤</td><td class="wrap"><kbd>F</kbd></td><td>동일</td></tr>
+    <tr><td class="wrap">다중 선택</td><td class="wrap"><kbd>Shift</kbd>+클릭 / 빈 영역 좌클릭 드래그(박스)</td><td>동일</td></tr>
     <tr><td class="wrap">화면 이동</td><td class="wrap">휠클릭·우클릭 드래그</td><td>동일</td></tr>
-    <tr><td class="wrap">메뉴 닫기</td><td class="wrap">Esc</td><td>동일</td></tr>
+    <tr><td class="wrap">메뉴 닫기</td><td class="wrap"><kbd>Esc</kbd></td><td>동일</td></tr>
   </table></div>
 </article>
 
@@ -797,7 +891,7 @@ footer{
   <div class="crumb">06 부록<span class="sep">/</span><b>노드 전체 카탈로그</b></div>
   <h3>노드 전체 카탈로그</h3>
   <div class="sub">6.3 · 75종</div>
-  <p>상세 스펙(입출력 포트·파라미터·과금)은 Living Document의 '노드 카탈로그' 시트를 원본으로 합니다.</p>
+  <p class="lead">상세 스펙(입출력 포트·파라미터·과금)은 Living Document의 '노드 카탈로그' 시트를 원본으로 합니다.</p>
 
   <h4>Input (11종)</h4>
   <div class="tbl-wrap"><table>
@@ -914,8 +1008,8 @@ footer{
 <article id="s0604">
   <div class="crumb">06 부록<span class="sep">/</span><b>모델 전체 카탈로그</b></div>
   <h3>모델 전체 카탈로그</h3>
-  <div class="sub">6.4 · 192종</div>
-  <p>원본은 모델 카탈로그 시트(코드 config 기준, 활성 187종 / 비활성 5종)입니다. Slug 등 상세 정보는 시트를 참조하세요. 실제 노출 여부는 관리자의 '모델 노출 설정'에 따라 달라집니다.</p>
+  <div class="sub">6.4 · 현재 192종 · 수시 변경</div>
+  <p class="lead">원본은 모델 카탈로그 시트(코드 config 기준, 활성 187종 / 비활성 5종)입니다. Slug 등 상세 정보는 시트를 참조하세요. 실제 노출 여부는 관리자의 '모델 노출 설정'에 따라 달라집니다.</p>
 
   <h4>모델 카탈로그 시트</h4>
   <p>모드·프로바이더·Slug·활성 여부를 포함한 전체 모델 목록입니다. 새 탭에서 열립니다.</p>
@@ -985,29 +1079,28 @@ footer{
   <div class="crumb">06 부록<span class="sep">/</span><b>용어 사전</b></div>
   <h3>용어 사전</h3>
   <div class="sub">6.6 · Glossary</div>
-  <div class="tbl-wrap"><table>
-    <tr><th>용어</th><th>정의</th></tr>
-    <tr><td class="wrap">노드 (Node)</td><td class="wrap">작업 단위 — Input / Generation / Utility / Output</td></tr>
-    <tr><td>캔버스</td><td class="wrap">노드를 배치하고 연결하는 작업 영역</td></tr>
-    <tr><td>핸들</td><td class="wrap">노드 가장자리의 연결점</td></tr>
-    <tr><td>워크플로우</td><td class="wrap">노드와 연결선으로 구성한 작업 흐름 한 벌 (파일 단위)</td></tr>
-    <tr><td>프롬프트</td><td class="wrap">AI에 전달하는 지시문</td></tr>
-    <tr><td>모델</td><td class="wrap">AI 엔진 — 동일한 작업도 모델에 따라 결과와 비용이 다릅니다</td></tr>
-    <tr><td>프로바이더</td><td class="wrap">모델을 제공하는 사업자 (fal, Replicate 등)</td></tr>
-    <tr><td>크레딧</td><td class="wrap">AI 실행 시 소모되는 사용 단위</td></tr>
-    <tr><td>스코프</td><td class="wrap">조회·공유 범위 — 개인 / 팀 / 엔터프라이즈</td></tr>
-    <tr><td>BYOK</td><td class="wrap">사용자 보유 API 키 등록 — 서버 키보다 우선 적용됩니다</td></tr>
-    <tr><td class="wrap">배치 (Batch)</td><td class="wrap">여러 항목을 일괄 처리하는 방식</td></tr>
-    <tr><td>립싱크</td><td class="wrap">오디오에 입 모양을 동기화한 영상</td></tr>
-    <tr><td class="wrap">Tier (등급)</td><td class="wrap">speed / balanced / premium / experimental</td></tr>
-  </table></div>
+  <div class="defs">
+    <div class="row"><div class="t">노드 (Node)</div><div class="d">작업 단위 — Input / Generation / Utility / Output</div></div>
+    <div class="row"><div class="t">캔버스</div><div class="d">노드를 배치하고 연결하는 작업 영역</div></div>
+    <div class="row"><div class="t">핸들</div><div class="d">노드 가장자리의 연결점</div></div>
+    <div class="row"><div class="t">워크플로우</div><div class="d">노드와 연결선으로 구성한 작업 흐름 한 벌 (파일 단위)</div></div>
+    <div class="row"><div class="t">프롬프트</div><div class="d">AI에 전달하는 지시문</div></div>
+    <div class="row"><div class="t">모델</div><div class="d">AI 엔진 — 동일한 작업도 모델에 따라 결과와 비용이 다릅니다</div></div>
+    <div class="row"><div class="t">프로바이더</div><div class="d">모델을 제공하는 사업자 (fal, Replicate 등)</div></div>
+    <div class="row"><div class="t">크레딧</div><div class="d">AI 실행 시 소모되는 사용 단위</div></div>
+    <div class="row"><div class="t">스코프</div><div class="d">조회·공유 범위 — 개인 / 팀 / 엔터프라이즈</div></div>
+    <div class="row"><div class="t">BYOK</div><div class="d">사용자 보유 API 키 등록 — 서버 키보다 우선 적용됩니다</div></div>
+    <div class="row"><div class="t">배치 (Batch)</div><div class="d">여러 항목을 일괄 처리하는 방식</div></div>
+    <div class="row"><div class="t">립싱크</div><div class="d">오디오에 입 모양을 동기화한 영상</div></div>
+    <div class="row"><div class="t">Tier (등급)</div><div class="d">speed / balanced / premium / experimental</div></div>
+  </div>
 </article>
 
 <article id="s0607">
   <div class="crumb">06 부록<span class="sep">/</span><b>관리자 가이드</b></div>
   <h3>관리자 가이드</h3>
   <div class="sub">6.7 · Admin Guide</div>
-  <p>슈퍼 관리자 메뉴(모델 노출·가격 설정, 워크스페이스 관리 등)의 상세 조작 가이드는 별도 문서로 제공될 예정입니다.</p>
+  <p class="lead">관리자 메뉴(모델 노출·가격 설정, 워크스페이스 관리 등)의 상세 조작 가이드는 별도 문서로 제공될 예정입니다.</p>
 </article>
 
 <footer>
@@ -1017,24 +1110,55 @@ footer{
 
 </div>
 </main>
+
+<aside class="toc empty">
+  <div class="toc-label">이 페이지</div>
+  <ul id="toc-list"></ul>
+</aside>
 </div>
 
 <script>
-/* 스크롤 위치에 따라 사이드바 현재 항목 강조 (동작하지 않아도 열람에는 지장 없음) */
+/* 사이드바 활성 표시 + 우측 "이 페이지" 목차 (동작하지 않아도 열람에는 지장 없음) */
 (function(){
   var links=[].slice.call(document.querySelectorAll('.nav-group a'));
   var map={};
   links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
   var arts=[].slice.call(document.querySelectorAll('article'));
+  var toc=document.querySelector('.toc');
+  var tocList=document.getElementById('toc-list');
+  var curId=null;
+
+  arts.forEach(function(art){
+    [].slice.call(art.querySelectorAll('h4')).forEach(function(h,i){
+      if(!h.id) h.id=art.id+'-t'+i;
+    });
+  });
+
+  function buildToc(art){
+    tocList.innerHTML='';
+    var hs=[].slice.call(art.querySelectorAll('h4'));
+    if(hs.length<2){toc.classList.add('empty');return;}
+    hs.forEach(function(h){
+      var li=document.createElement('li');
+      var a=document.createElement('a');
+      a.href='#'+h.id;a.textContent=h.textContent;
+      li.appendChild(a);tocList.appendChild(li);
+    });
+    toc.classList.remove('empty');
+  }
+
   function onScroll(){
-    var y=window.scrollY+120,cur=null;
+    var y=window.scrollY+140,cur=null;
     arts.forEach(function(el){if(el.offsetTop<=y)cur=el;});
     links.forEach(function(a){a.classList.remove('active');});
-    if(cur&&map[cur.id])map[cur.id].classList.add('active');
+    if(cur){
+      if(map[cur.id])map[cur.id].classList.add('active');
+      if(cur.id!==curId){curId=cur.id;buildToc(cur);}
+    }
   }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
-  /* 모바일: 목차 링크를 누르면 사이드바 닫기 */
+
   var t=document.getElementById('nav-toggle');
   links.forEach(function(a){a.addEventListener('click',function(){t.checked=false;});});
 })();
